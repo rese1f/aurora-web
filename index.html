@@ -167,42 +167,39 @@
 
         
         <p class="text abstract">
-
-            We introduce Cambrian-1, a family of multimodal LLMs (MLLMs) designed with a <strong>vision-<i>centric</i></strong> approach. 
-            While stronger language models can enhance multimodal capabilities, 
-            the design choices for vision components are often insufficiently explored and disconnected from visual representation learning research. 
-
+            <span class="small-caps">AuroraCap</span> is a multimodal LLM designed for image and video detailed captioning. 
+            We also release <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
             <br><br>
-            Cambrian-1 is structured around five key pillars, each offering important insights into the design space of MLLMs:
+            We will introduce our detailed captioning baseline and benchmark for video through the following five aspects:
             <ol class="text">
-                <li><strong><a href="#visual_representations">&sect;Visual Representations</a></strong>: We explore various vision encoders and their combinations.</li>
-                <li><strong><a href="#connector_design">&sect;Connector Design</a></strong>: We design a new dynamic and <i>spatially-aware</i> connector that integrates visual features from several models with LLMs while reducing the number of tokens.</li>
-                <li><strong><a href="#instruction_data">&sect;Instruction Tuning Data</a></strong>: We curate high-quality visual instruction-tuning data from public sources, emphasizing the importance of distribution balancing.</li>
-                <li><strong><a href="#sec:inst_tuning">&sect;Instruction Tuning Recipes</a></strong>: We discuss instruction tuning strategies and practices.</li>
-                <li><strong><a href="#sec:benchmarking">&sect;Benchmarking</a></strong>: We examine existing MLLM benchmarks and introduce a new vision-centric benchmark "CV-Bench".</li>
+                <li><strong><a href="#connector_design">&sect;Training Recipe</a></strong>: We illustrate how image-based LLaVA-like multimodal large language models can be easily adapted to a video one without any additional parameters.</li>
+                <li><strong><a href="#vdc_curation">&sect;<span class="small-caps">VDC</span> Curation</a></strong>: We present <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring 1K videos with significantly longer and more detailed captions than existing datasets.</li>
+                <li><strong><a href="#vdcscore_design">&sect;<span class="small-caps">VDCScore</span> Design</a></strong>: We propose a new LLM-assisted metric <span class="small-caps">VDCScore</span> for bettering evaluation, which adopts a divide-and-conquer strategy to transform the evaluation of long captions into multiple short question-answering pairs.</li>
+                <li><strong><a href="#benchmarking">&sect;Benchmarking</a></strong>: We comprehensively evaluate proprietary and open-source models using our proposed <span class="small-caps">VDCScore</span> metric.</li>
+                <li><strong><a href="#tome_impact">&sect;Token Kept Ratio Impact</a></strong>: We illustrate how we can reduce the number of token used for image or video before injecting into LLM with marginal performance drop.</li>
             </ol>
         </p>
 
         <div class="icon-row">
-            <a href="#visual-representation" class="icon-link">
+            <a href="#training-recipe" class="icon-link">
                 <img src="static/img/icons/visual.svg" alt="Visual Representation Logo" class="icon">
-                Visual<br>Representations
+                Training<br>Recipe
             </a>
-            <a href="#connector_design" class="icon-link">
+            <a href="#vdc_curation" class="icon-link">
                 <img src="static/img/icons/connector.svg" alt="Connector Logo" class="icon">
-                Connector<br>Design
+                <span class="small-caps">VDC</span><br>Curation
             </a>
-            <a href="#instruction_data" class="icon-link">
+            <a href="#vdcscore_design" class="icon-link">
                 <img src="static/img/icons/data.svg" alt="Data Logo" class="icon">
-                Instruction<br>Data
+                <span class="small-caps">VDCScore</span><br>Design
             </a>
-            <a href="#sec:inst_tuning" class="icon-link">
+            <a href="#benchmarking" class="icon-link">
                 <img src="static/img/icons/recipe.svg" alt="Recipe Logo" class="icon">
-                Instruction<br>Recipes
+                Benchmarking
             </a>
-            <a href="#sec:benchmarking" class="icon-link">
+            <a href="#tome_impact" class="icon-link">
                 <img src="static/img/icons/eval.svg" alt="Eval Logo" class="icon">
-                Evaluation<br>Protocol
+                Token Kept<br>Ratio Impact
             </a>
         </div>
 
@@ -213,18 +210,17 @@
 
 
         <p class="text abstract">
-            To this end, Cambrian-1 not only achieves state-of-the-art performance, but also serves as a comprehensive, open cookbook for instruction-tuned MLLMs. See <a href="#State-of-the-art-MLLM-performance">§State-of-the-art MLLM performance</a>. 
-            We provide <a href="https://huggingface.co/nyu-visionx" target="_blank">model weights</a>, 
-            <a href="https://github.com/cambrian-mllm/cambrian" target="_blank">code</a>, 
-            <a href="https://huggingface.co/nyu-visionx" target="_blank">datasets</a>, 
-            and detailed instruction-tuning and evaluation recipes. We hope our release will inspire and accelerate advancements in multimodal systems and visual representation learning.
+            We provide <a href="https://huggingface.co/collections/Reself/auroracap-66d117ffe13bedda96702013" target="_blank">model weights</a>, 
+            <a href="https://github.com/rese1f/aurora" target="_blank">code</a>, 
+            <a href="https://huggingface.co/datasets/Reself/AuroraCap-trainset" target="_blank">datasets</a>, 
+            and <a href="https://huggingface.co/datasets/Reself/Video-Detailed-Caption" target="_blank">benchmark</a>. We hope our release will inspire and accelerate advancements in multimodal systems and visual representation learning.
         </p>
 
         
 
         <hr>
 
-        <div id='visual_representations' class="vision-block">
+        <div id='training-recipe' class="vision-block">
             
             <div id="sec:benchmarking" class="sub-section">
                 <h1 class="text">Analyzing the Benchmarks</h1>
@@ -290,7 +286,7 @@
                     </figure>
                 </d-figure>
             </div>
-            <div id='visual-representation' class="viusal-representation-block">
+            <div id='training-recipe' class="viusal-representation-block">
             <h1 class="text">MLLMs as a Vision Model Evaluator </h1>
                 
                 <p class="text">
