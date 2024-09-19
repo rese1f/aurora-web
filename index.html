@@ -47,6 +47,13 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>  <!-- jquery -->
         <script defer src="./static/js/medium-zoom.min.js"></script>
         <script defer src="./static/js/zoom.js"></script>
+
+        <style>
+            .small-caps {
+                font-variant: small-caps;
+            }
+        </style>
+
     </head>
     <body>
         <div class="header-wrapper">
@@ -1206,9 +1213,12 @@
         <div id="conclusion" style="position: relative; margin-top: 40px; margin-bottom: 0px;">
             <h2 class="text" style="margin-top:0px; margin-bottom:10px">Conclusion</h2>
             <p class="text">
-                To conclude, Cambrian-1 is a family of state-of-the-art MLLMs that achieve top performance across diverse benchmarks 
-                and excel in visual-centric tasks. We provide model weights, open-source code, datasets, and detailed recipes for model training and evaluation. 
-                We hope our work will strengthen the open research community and accelerate research in both visual representation learning and multimodal systems.
+                In this paper, we introduce <span class="small-caps">VDC</span>, a novel video detailed captioning benchmark designed to evaluate comprehensive and coherent textual descriptions of video content. 
+                We also propose <span class="small-caps">VDCScore</span> for better evaluating. Besides, by leveraging the token merging strategy, we significantly reduce the computational overhead without compromising performance. 
+                Our extensive evaluation on various video and image captioning benchmarks demonstrated that <span class="small-caps">AuroraCap</span> achieves competitive results, even outperforming state-of-the-art models in some tasks. 
+                We also conduct thorough ablation studies to validate the effectiveness of token merging and other aspects of our model. 
+                We found that the current model performs poorly in terms of the trade-off between performance and the scale of input tokens. 
+                Additionally, there is still room for improvement in camera handling and detailed captioning. We hope that <span class="small-caps">VDC</span> can bring new insights to the video detailed captioning task.
             </p>
         </div>
 
