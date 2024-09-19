@@ -221,8 +221,178 @@
         <hr>
 
         <div id='training-recipe' class="vision-block">
+            <div class="sub-section">
+                <h1 class="text">Training Recipe</h1>
+
+                    <p class="text">
+                        <p class="text">
+                        <strong>Architecture.</strong> To effectively leverage the capabilities of both the pre-trained LLM and visual model, LLaVA adapt a simple multilayer perceptron (MLP) projection layer to connect each patch tokens of image features into the word embedding space. 
+                        The original LLaVA model is trained by a two-stage instruction-tuning procedure, which first pretraining projection layer for feature alignment and then finetuning end-to-end while freeze the visual encoder. 
+                        We adapt some conclusion from recent works for training the model.
+                        We use the the training loss among the last ten iterations in original LLaVA alignment pretraining stage to guidance the ViT and LLM backbones selection</li>
+                        </p>
+                        <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="1" class="tb-hdr">ViT</th>
+                                        <th colspan="1" class="tb-hdr">ViT Size</th>
+                                        <th colspan="1" class="tb-hdr">LLM</th>
+                                        <th colspan="1" class="tb-hdr">LLM Size</th>
+                                        <th colspan="1" class="tb-hdr">Loss</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="section-border">facebook/dinov2-giant</td>
+                                        <td>1,136M</td>
+                                        <td class="section-border">microsoft/phi-2</td>
+                                        <td>2.7B</td>
+                                        <td>3.3021</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                        <td>428M</td>
+                                        <td class="section-border">Qwen/Qwen1.5-0.5B-Chat</td>
+                                        <td>0.5B</td>
+                                        <td>3.1001</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                        <td>428M</td>
+                                        <td class="section-border">microsoft/phi-2</td>
+                                        <td>2.7B</td>
+                                        <td>2.8067</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">microsoft/phi-2</td>
+                                        <td>2.7B</td>
+                                        <td>2.7124</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">facebook/dinov2-giant</td>
+                                        <td>1,136M</td>
+                                        <td class="section-border">lmsys/vicuna-13b-v1.5</td>
+                                        <td>13B</td>
+                                        <td>2.3895</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">internlm/internlm2-chat-7b</td>
+                                        <td>7B</td>
+                                        <td>2.3437</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">internlm/internlm2-chat-20b</td>
+                                        <td>20B</td>
+                                        <td>2.2745</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">deepseek-ai/deepseek-llm-67b-chat</td>
+                                        <td>67B</td>
+                                        <td>2.1572</td>
+                                    </tr>   
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">mistralai/Mistral-7B-Instruct-v0.1</td>
+                                        <td>7B</td>
+                                        <td>2.1569</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                        <td>428M</td>
+                                        <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
+                                        <td>8x7B</td>
+                                        <td>2.0815</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
+                                        <td>632M</td>
+                                        <td class="section-border">lmsys/vicuna-13b-v1.5-16k</td>
+                                        <td>13B</td>
+                                        <td>2.0443</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
+                                        <td>7B</td>
+                                        <td>2.0365</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
+                                        <td>8x7B</td>
+                                        <td>1.9889</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                        <td>428M</td>
+                                        <td class="section-border">lmsys/vicuna-7b-v1.5</td>
+                                        <td>7B</td>
+                                        <td>1.9762</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">meta-llama/Llama-2-13b-chat-hf</td>
+                                        <td>13B</td>
+                                        <td>1.9708</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                        <td>1,845M</td>
+                                        <td class="section-border">lmsys/vicuna-13b-v1.5</td>
+                                        <td>13B</td>
+                                        <td>1.9412</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
+                                        <td>632M</td>
+                                        <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
+                                        <td>7B</td>
+                                        <td>1.8679</td>
+                                    </tr>  
+                                    <tr>
+                                        <td class="section-border">google/siglip-so400m-patch14-384</td>
+                                        <td>878M</td>
+                                        <td class="section-border">meta-llama/Meta-Llama-3.1-8B-Instruct</td>
+                                        <td>8B</td>
+                                        <td>1.7993</td>
+                                    </tr> 
+                                    </tbody>
+                                </table>
+                            </div>
+                            <figcaption style="text-align: center; width: 140%;">
+                                Table 1: Final training loss during pretraining stage with original LLaVA pretraining data.
+                            </figcaption>
+                        </div>
+                        <p class="text">
+                            <strong>Benchmark Clustering and Analysis:</strong> Through correlation analysis and principal component analysis of MLLM performances across various benchmarks, distinct clusters emerge categorized as "General," "Knowledge," "Chart & OCR," and "Vision-Centric." 
+                            We also find that vision-centric benchmarks are underrepresented in the current evaluation landscape.
+                        </p>
+                    <d-figure id="fig-comparison" >
+                        <figure>
+                            <img data-zoomable="" draggable="false" src="static/img/bench_cat.png" alt="benchmark category">
+                            <figcaption>
+                                <strong>Figure 1:</strong> Analyzing the benchmarks.
+                                <strong>Left:</strong> Performance comparison of MLLMs with visual input enabled and disabled across various benchmarks. <strong>Right:</strong> Principal component analysis displaying clusters of benchmarks based on performance metrics, with bubble size corresponding to benchmark size.
+                            </figcaption>
+                        </figure>
+                    </d-figure>
+            </div>
             
-            <div id="sec:benchmarking" class="sub-section">
+            <!-- <div id="sec:benchmarking" class="sub-section">
                 <h1 class="text">Analyzing the Benchmarks</h1>
 
                     <p class="text">
@@ -524,7 +694,7 @@
                     Therefore, we seek a more effective strategy that fully leverages model combinations with less information loss and more flexibility.
                 </p>
 
-        </div>
+            </div> -->
         </div>
 
         <div id='connector_design' class="connector-block">
