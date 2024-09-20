@@ -76,7 +76,7 @@
             <div class="header-container" id="header-container">
                 <div class="header-content">
                     <h1 style="margin-top: 0px">AuroraCap</h1>
-                    <h2>A Detailed Captioning Baseline and Benchmark for Video</h2>
+                    <h2>Less is More for Efficient Video Detailed Captioning and a New Benchmark</h2>
                         <p>
                             AuroraCap is a multimodal LLM designed for image and video detailed captioning. We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
                         </p>
@@ -98,26 +98,26 @@
                             <span>PDF</span>
                         </a>
                         <!-- replace image -->
-                        <a href="" class="button" target="_blank">
+                        <a href="https://github.com/rese1f/aurora" class="button" target="_blank">
                             <span class="icon is-small">
                                 <i class="fab fa-github"></i>
                             </span>
                             <span>GitHub</span>
                         </a>
                         <!-- <br> -->
-                        <a href="" class="button" target="_blank">
+                        <a href="https://huggingface.co/collections/Reself/auroracap-66d117ffe13bedda96702013" class="button" target="_blank">
                             <span class="icon is-small">
                                 <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
                             </span>
                             <span>Model</span>
                         </a>
-                        <!-- <a href="https://huggingface.co/collections/nyu-visionx/cambrian-data-6667ce801e179b4fbe774e11" class="button" target="_blank">
+                        <a href="https://huggingface.co/datasets/Reself/AuroraCap-trainset" class="button" target="_blank">
                             <span class="icon is-small">
                                 <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
                             </span>
                             <span>Data</span>
-                        </a>                         -->
-                        <a href="https://huggingface.co/datasets/nyu-visionx/CV-Bench" class="button" target="_blank">
+                        </a>                        
+                        <a href="https://huggingface.co/datasets/Reself/Video-Detailed-Caption" class="button" target="_blank">
                             <span class="icon is-small">
                                 <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
                             </span>
@@ -148,17 +148,15 @@
         <div class="byline">
             <div class="byline-container">
                 <p>
-                    <a href="https://rese1f.github.io/" class="author-link" target="_blank">Wenhao Chai<sup>*</sup></a><sup> 1,2</sup> &emsp;
+                    <a href="https://rese1f.github.io/" class="author-link" target="_blank">Wenhao Chai</a><sup> 1,2</sup> &emsp;
                     <a href="https://espere-1119-song.github.io/" class="author-link" target="_blank">Enxin Song</a> &emsp;
-                    <a href="https://scholar.google.com/citations?user=WjF1dugAAAAJ" class="author-link" target="_blank">Vashisht Madhavan</a><sup> 2</sup> &emsp;
-                    <a href="https://cs.stanford.edu/~chenlin/" class="author-link" target="_blank">Chenlin Meng</a><sup> 2,3</sup> &emsp;
-                    <br>
-                    <a href="https://omerbt.github.io/" class="author-link" target="_blank">Omer Bar-Tal</a><sup> 2</sup> &emsp;
                     <a href="https://yilundu.github.io/" class="author-link" target="_blank">Yilun Du</a><sup> 4,5</sup> &emsp;
+                    <a href="https://cs.stanford.edu/~chenlin/" class="author-link" target="_blank">Chenlin Meng</a><sup> 2,3</sup> &emsp;
+                    <a href="https://scholar.google.com/citations?user=WjF1dugAAAAJ" class="author-link" target="_blank">Vashisht Madhavan</a><sup> 2</sup> &emsp;
+                    <a href="https://omerbt.github.io/" class="author-link" target="_blank">Omer Bar-Tal</a><sup> 2</sup> &emsp;
                     <a href="https://people.ece.uw.edu/hwang/" class="author-link" target="_blank">Jeng-Neng Hwang</a><sup> 1</sup> &emsp;
                     <a href="https://www.sainingxie.com/" class="author-link" target="_blank">Saining Xie</a><sup> 6</sup> &emsp;
-                    <br>
-                    <a href="https://nlp.stanford.edu/~manning/" class="author-link" target="_blank">Christopher D. Manning<sup>&dagger;</sup></a><sup> 3</sup> &emsp;
+                    <a href="https://nlp.stanford.edu/~manning/" class="author-link" target="_blank">Christopher D. Manning</a><sup> 3</sup> &emsp;
                     </p>
                 <p>
                     <sup>1</sup> <a href="https://www.washington.edu/" class="affiliation-link" id="affiliation" target="_blank">University of Washington</a> &emsp;
@@ -172,39 +170,38 @@
                 </p>
             </div>
         </div>
-        <p style="text-align: center;">
+        <!-- <p style="text-align: center;">
             <span class="author-note"><sup>*</sup>Project lead</span>&emsp;
             <span class="author-note"><sup>&dagger;</sup>Corresponding author</span>
-        </p>
+        </p> -->
         
 
         
         <p class="text abstract">
-            <span class="small-caps">AuroraCap</span> is a multimodal LLM designed for image and video detailed captioning. 
+            AuroraCap is a efficientmultimodal LLM designed for image and video detailed captioning. 
             We also release <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
-            <br><br>
-            We will introduce our detailed captioning baseline and benchmark for video through the following five aspects:
+            <br>
             <ol class="text">
-                <li><strong><a href="#training-recipe">&sect; AuroraCap: A Video Detailed Captioning Baseline</a></strong>: We illustrate how image-based LLaVA-like multimodal large language models can be easily adapted to a video one without any additional parameters.</li>
-                <li><strong><a href="#vdc">&sect; <span class="small-caps">VDC</span> Curation</a></strong>: We present <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring 1K videos with significantly longer and more detailed captions than existing datasets.</li>
+                <li style="list-style-type: none;"><strong><a href="#training-recipe">&sect; Model: AuroraCap</a></strong>: We illustrate how we can reduce the number of token used for image or video before injecting into LLM with marginal performance drop.</li>
+                <li style="list-style-type: none;"><strong><a href="#vdc">&sect; Benchmark: Video Detailed Caption (VDC)</a></strong>: We present <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.</li>
             </ol>
         </p>
 
-        <div class="icon-row">
+        <!-- <div class="icon-row">
             <a href="#training-recipe" class="icon-link">
                 <img src="static/img/icons/visual.svg" alt="Visual Representation Logo" class="icon">
-                AuroraCap
+                Model: AuroraCap
             </a>
             <a href="#vdc" class="icon-link">
                 <img src="static/img/icons/connector.svg" alt="Connector Logo" class="icon">
-                <span class="small-caps">VDC</span><br>Curation
+                Benchmark: VDC
             </a>
-        </div>
+        </div> -->
 
-        <p class="click-hint" style="width: 85%;">
+        <!-- <p class="click-hint" style="width: 85%;">
             <img src="static/img/icons/click.gif" style="width: 1.5rem">
             <strong>Click to jump to each section.</strong>
-        </p>
+        </p> -->
 
 
         <p class="text abstract">
@@ -220,7 +217,7 @@
 
         <div id='training-recipe' class="vision-block">
             <div class="sub-section">
-                <h1 class="text">AuroraCap: A Video Detailed Captioning Baseline</h1>
+                <h1 class="text">AuroraCap: A Efficient Video Detailed Captioner</h1>
 
                     <p class="text">
                         <p class="text">
@@ -375,7 +372,7 @@
                             <strong>Token merging.</strong> 
                             To increase the throughput of existing ViT models, Token Merging is proposed to gradually combines similar tokens in a transformer to reduce the number of tokens passing through ViT models. 
                             Token Merging has been proven to be effective on image and video classification tasks even without the need for training.
-                            We conduct frame-wise token merging in AURORACAP, where the feature is extracted by CLIP ViT-H model. 
+                            We conduct frame-wise token merging in AuroraCap, where the feature is extracted by CLIP ViT-H model. 
                             We show token merging visualization examples from  COCO, VG, SA-1B as follows:
                             <d-figure id="fig-cvcb" >
                                 <figure>
@@ -443,7 +440,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td class="italic">LLaVA-1.5-7B (Liu et al., 2023)</td>
+                                                <td class="italic">LLaVA-1.5-7B</td>
                                                 <td>74.9</td>
                                                 <td>71.7</td>
                                                 <td>28.4</td>
@@ -489,7 +486,7 @@
                                                 <td>56.5</td>
                                             </tr>
                                             <tr>
-                                                <td class="italic">LLaVA-1.6-7B (Liu et al., 2024a)</td>
+                                                <td class="italic">LLaVA-1.6-7B</td>
                                                 <td>68.4</td>
                                                 <td>69.6</td>
                                                 <td>26.6</td>
@@ -525,7 +522,7 @@
                                                 <td>52.1</td>
                                             </tr>
                                             <tr>
-                                                <td class="italic">MiniCPM-V-3B (Hu et al., 2023)</td>
+                                                <td class="italic">MiniCPM-V-3B</td>
                                                 <td>66.8</td>
                                                 <td>68.0</td>
                                                 <td>25.1</td>
@@ -543,7 +540,7 @@
                                                 <td>52.3</td>
                                             </tr>
                                             <tr>
-                                                <td class="italic">DeCap (Li et al., 2023d)</td>
+                                                <td class="italic">DeCap</td>
                                                 <td>56.7</td>
                                                 <td>—</td>
                                                 <td>21.2</td>
@@ -561,7 +558,7 @@
                                                 <td>—</td>
                                             </tr>
                                             <tr>
-                                                <td class="italic">Flamingo-80B (Alayrac et al., 2022)</td>
+                                                <td class="italic">Flamingo-80B</td>
                                                 <td>67.2</td>
                                                 <td>—</td>
                                                 <td>—</td>
@@ -579,7 +576,7 @@
                                                 <td>—</td>
                                             </tr>
                                             <tr>
-                                                <td class="italic">Chameleon-34B (Team, 2024)</td>
+                                                <td class="italic">Chameleon-34B</td>
                                                 <td>74.7<sup>2</sup></td>
                                                 <td>—</td>
                                                 <td>—</td>
@@ -633,7 +630,7 @@
                                                 <td>—</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>AURORACAP-7B</strong></td>
+                                                <td><strong>AuroraCap-7B</strong></td>
                                                 <td class="highlight-red"><strong>88.9</strong></td>
                                                 <td class="highlight-red"><strong>75.6</strong></td>
                                                 <td class="highlight-red"><strong>32.8</strong></td>
@@ -764,7 +761,7 @@
                                                 <td>21.8</td>
                                             </tr>
                                             <tr>
-                                                <td>AURORACAP-7B</td>
+                                                <td>AuroraCap-7B</td>
                                                 <td class="highlight-red">33.1</td>
                                                 <td class="highlight-red">58.6</td>
                                                 <td class="highlight-red">21.0</td>
@@ -922,7 +919,7 @@
                                                 <td>—</td>
                                             </tr>
                                             <tr>
-                                                <td><strong>AURORACAP-7B</strong></td>
+                                                <td><strong>AuroraCap-7B</strong></td>
                                                 <td class="highlight-red"><strong>61.8</strong></td>
                                                 <td class="highlight-red"><strong>3.8</strong></td>
                                                 <td>62.6</td>
