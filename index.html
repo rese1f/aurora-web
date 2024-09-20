@@ -52,6 +52,22 @@
             .small-caps {
                 font-variant: small-caps;
             }
+            .pdf-container {
+            width: 80%; 
+            max-width: 1200px; 
+            height: 600px;
+            margin: 0 auto; 
+            border: 1px solid #ccc; 
+        }
+        embed {
+            width: 100%;
+            height: 100%;
+        }
+        .highlight-red {
+            background-color: #b83a4b36;
+            font-weight: bold;
+        }
+
         </style>
 
     </head>
@@ -125,9 +141,6 @@
                         <div><strong>Benchmark</strong>: We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.</div>
                     </div>
                 </div>
-                <!-- <div class="header-image">
-                    <img draggable="false" src="static/img/cambrian.png" alt="Teaser Image" class="teaser-image">
-                </div> -->
             </div>
         </div>
         
@@ -172,34 +185,19 @@
             <br><br>
             We will introduce our detailed captioning baseline and benchmark for video through the following five aspects:
             <ol class="text">
-                <li><strong><a href="#connector_design">&sect;Training Recipe</a></strong>: We illustrate how image-based LLaVA-like multimodal large language models can be easily adapted to a video one without any additional parameters.</li>
-                <li><strong><a href="#vdc_curation">&sect;<span class="small-caps">VDC</span> Curation</a></strong>: We present <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring 1K videos with significantly longer and more detailed captions than existing datasets.</li>
-                <li><strong><a href="#vdcscore_design">&sect;<span class="small-caps">VDCScore</span> Design</a></strong>: We propose a new LLM-assisted metric <span class="small-caps">VDCScore</span> for bettering evaluation, which adopts a divide-and-conquer strategy to transform the evaluation of long captions into multiple short question-answering pairs.</li>
-                <li><strong><a href="#benchmarking">&sect;Benchmarking</a></strong>: We comprehensively evaluate proprietary and open-source models using our proposed <span class="small-caps">VDCScore</span> metric.</li>
-                <li><strong><a href="#tome_impact">&sect;Token Kept Ratio Impact</a></strong>: We illustrate how we can reduce the number of token used for image or video before injecting into LLM with marginal performance drop.</li>
+                <li><strong><a href="#training-recipe">&sect; AuroraCap: A Video Detailed Captioning Baseline</a></strong>: We illustrate how image-based LLaVA-like multimodal large language models can be easily adapted to a video one without any additional parameters.</li>
+                <li><strong><a href="#vdc">&sect; <span class="small-caps">VDC</span> Curation</a></strong>: We present <span class="small-caps">VDC</span>, the first benchmark for detailed video captioning, featuring 1K videos with significantly longer and more detailed captions than existing datasets.</li>
             </ol>
         </p>
 
         <div class="icon-row">
             <a href="#training-recipe" class="icon-link">
                 <img src="static/img/icons/visual.svg" alt="Visual Representation Logo" class="icon">
-                Training<br>Recipe
+                AuroraCap
             </a>
-            <a href="#vdc_curation" class="icon-link">
+            <a href="#vdc" class="icon-link">
                 <img src="static/img/icons/connector.svg" alt="Connector Logo" class="icon">
                 <span class="small-caps">VDC</span><br>Curation
-            </a>
-            <a href="#vdcscore_design" class="icon-link">
-                <img src="static/img/icons/data.svg" alt="Data Logo" class="icon">
-                <span class="small-caps">VDCScore</span><br>Design
-            </a>
-            <a href="#benchmarking" class="icon-link">
-                <img src="static/img/icons/recipe.svg" alt="Recipe Logo" class="icon">
-                Benchmarking
-            </a>
-            <a href="#tome_impact" class="icon-link">
-                <img src="static/img/icons/eval.svg" alt="Eval Logo" class="icon">
-                Token Kept<br>Ratio Impact
             </a>
         </div>
 
@@ -222,174 +220,725 @@
 
         <div id='training-recipe' class="vision-block">
             <div class="sub-section">
-                <h1 class="text">Training Recipe</h1>
+                <h1 class="text">AuroraCap: A Video Detailed Captioning Baseline</h1>
 
                     <p class="text">
                         <p class="text">
-                        <strong>Architecture.</strong> To effectively leverage the capabilities of both the pre-trained LLM and visual model, LLaVA adapt a simple multilayer perceptron (MLP) projection layer to connect each patch tokens of image features into the word embedding space. 
-                        The original LLaVA model is trained by a two-stage instruction-tuning procedure, which first pretraining projection layer for feature alignment and then finetuning end-to-end while freeze the visual encoder. 
-                        We adapt some conclusion from recent works for training the model.
-                        We use the the training loss among the last ten iterations in original LLaVA alignment pretraining stage to guidance the ViT and LLM backbones selection</li>
-                        </p>
-                        <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
-                            <div class="table-container">
-                                <table class="data-table">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="1" class="tb-hdr">ViT</th>
-                                        <th colspan="1" class="tb-hdr">ViT Size</th>
-                                        <th colspan="1" class="tb-hdr">LLM</th>
-                                        <th colspan="1" class="tb-hdr">LLM Size</th>
-                                        <th colspan="1" class="tb-hdr">Loss</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td class="section-border">facebook/dinov2-giant</td>
-                                        <td>1,136M</td>
-                                        <td class="section-border">microsoft/phi-2</td>
-                                        <td>2.7B</td>
-                                        <td>3.3021</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
-                                        <td>428M</td>
-                                        <td class="section-border">Qwen/Qwen1.5-0.5B-Chat</td>
-                                        <td>0.5B</td>
-                                        <td>3.1001</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
-                                        <td>428M</td>
-                                        <td class="section-border">microsoft/phi-2</td>
-                                        <td>2.7B</td>
-                                        <td>2.8067</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">microsoft/phi-2</td>
-                                        <td>2.7B</td>
-                                        <td>2.7124</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">facebook/dinov2-giant</td>
-                                        <td>1,136M</td>
-                                        <td class="section-border">lmsys/vicuna-13b-v1.5</td>
-                                        <td>13B</td>
-                                        <td>2.3895</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">internlm/internlm2-chat-7b</td>
-                                        <td>7B</td>
-                                        <td>2.3437</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">internlm/internlm2-chat-20b</td>
-                                        <td>20B</td>
-                                        <td>2.2745</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">deepseek-ai/deepseek-llm-67b-chat</td>
-                                        <td>67B</td>
-                                        <td>2.1572</td>
-                                    </tr>   
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">mistralai/Mistral-7B-Instruct-v0.1</td>
-                                        <td>7B</td>
-                                        <td>2.1569</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
-                                        <td>428M</td>
-                                        <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
-                                        <td>8x7B</td>
-                                        <td>2.0815</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
-                                        <td>632M</td>
-                                        <td class="section-border">lmsys/vicuna-13b-v1.5-16k</td>
-                                        <td>13B</td>
-                                        <td>2.0443</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
-                                        <td>7B</td>
-                                        <td>2.0365</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
-                                        <td>8x7B</td>
-                                        <td>1.9889</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">openai/clip-vit-large-patch14-336</td>
-                                        <td>428M</td>
-                                        <td class="section-border">lmsys/vicuna-7b-v1.5</td>
-                                        <td>7B</td>
-                                        <td>1.9762</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">meta-llama/Llama-2-13b-chat-hf</td>
-                                        <td>13B</td>
-                                        <td>1.9708</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
-                                        <td>1,845M</td>
-                                        <td class="section-border">lmsys/vicuna-13b-v1.5</td>
-                                        <td>13B</td>
-                                        <td>1.9412</td>
-                                    </tr> 
-                                    <tr>
-                                        <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
-                                        <td>632M</td>
-                                        <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
-                                        <td>7B</td>
-                                        <td>1.8679</td>
-                                    </tr>  
-                                    <tr>
-                                        <td class="section-border">google/siglip-so400m-patch14-384</td>
-                                        <td>878M</td>
-                                        <td class="section-border">meta-llama/Meta-Llama-3.1-8B-Instruct</td>
-                                        <td>8B</td>
-                                        <td>1.7993</td>
-                                    </tr> 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <figcaption style="text-align: center; width: 140%;">
-                                Table 1: Final training loss during pretraining stage with original LLaVA pretraining data.
-                            </figcaption>
-                        </div>
+                        <h2 class="text">Architecture</h2>
                         <p class="text">
-                            <strong>Benchmark Clustering and Analysis:</strong> Through correlation analysis and principal component analysis of MLLM performances across various benchmarks, distinct clusters emerge categorized as "General," "Knowledge," "Chart & OCR," and "Vision-Centric." 
-                            We also find that vision-centric benchmarks are underrepresented in the current evaluation landscape.
+                            <strong>LLaVA.</strong> 
+                            To effectively leverage the capabilities of both the pre-trained LLM and visual model, LLaVA adapt a simple multilayer perceptron (MLP) projection layer to connect each patch tokens of image features into the word embedding space. 
+                            The original LLaVA model is trained by a two-stage instruction-tuning procedure, which first pretraining projection layer for feature alignment and then finetuning end-to-end while freeze the visual encoder. 
+                            We adapt some conclusion from recent works for training the model.
+                            We use the the training loss among the last ten iterations in original LLaVA alignment pretraining stage to guidance the ViT and LLM backbones selection.
+                            <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="table-container">
+                                    <table class="data-table">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="1" class="tb-hdr">ViT</th>
+                                            <th colspan="1" class="tb-hdr">ViT Size</th>
+                                            <th colspan="1" class="tb-hdr">LLM</th>
+                                            <th colspan="1" class="tb-hdr">LLM Size</th>
+                                            <th colspan="1" class="tb-hdr">Loss</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td class="section-border">facebook/dinov2-giant</td>
+                                            <td>1,136M</td>
+                                            <td class="section-border">microsoft/phi-2</td>
+                                            <td>2.7B</td>
+                                            <td>3.3021</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                            <td>428M</td>
+                                            <td class="section-border">Qwen/Qwen1.5-0.5B-Chat</td>
+                                            <td>0.5B</td>
+                                            <td>3.1001</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                            <td>428M</td>
+                                            <td class="section-border">microsoft/phi-2</td>
+                                            <td>2.7B</td>
+                                            <td>2.8067</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">microsoft/phi-2</td>
+                                            <td>2.7B</td>
+                                            <td>2.7124</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">facebook/dinov2-giant</td>
+                                            <td>1,136M</td>
+                                            <td class="section-border">lmsys/vicuna-13b-v1.5</td>
+                                            <td>13B</td>
+                                            <td>2.3895</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">internlm/internlm2-chat-7b</td>
+                                            <td>7B</td>
+                                            <td>2.3437</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">internlm/internlm2-chat-20b</td>
+                                            <td>20B</td>
+                                            <td>2.2745</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">deepseek-ai/deepseek-llm-67b-chat</td>
+                                            <td>67B</td>
+                                            <td>2.1572</td>
+                                        </tr>   
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">mistralai/Mistral-7B-Instruct-v0.1</td>
+                                            <td>7B</td>
+                                            <td>2.1569</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                            <td>428M</td>
+                                            <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
+                                            <td>8x7B</td>
+                                            <td>2.0815</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
+                                            <td>632M</td>
+                                            <td class="section-border">lmsys/vicuna-13b-v1.5-16k</td>
+                                            <td>13B</td>
+                                            <td>2.0443</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
+                                            <td>7B</td>
+                                            <td>2.0365</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">mistralai/Mixtral-8x7B-Instruct-v0.1</td>
+                                            <td>8x7B</td>
+                                            <td>1.9889</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">openai/clip-vit-large-patch14-336</td>
+                                            <td>428M</td>
+                                            <td class="section-border">lmsys/vicuna-7b-v1.5</td>
+                                            <td>7B</td>
+                                            <td>1.9762</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">meta-llama/Llama-2-13b-chat-hf</td>
+                                            <td>13B</td>
+                                            <td>1.9708</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">laion/CLIP-ViT-bigG-14-laion2B-39B-b160k</td>
+                                            <td>1,845M</td>
+                                            <td class="section-border">lmsys/vicuna-13b-v1.5</td>
+                                            <td>13B</td>
+                                            <td>1.9412</td>
+                                        </tr> 
+                                        <tr>
+                                            <td class="section-border">apple/DFN5B-CLIP-ViT-H-14-378</td>
+                                            <td>632M</td>
+                                            <td class="section-border">lmsys/vicuna-7b-v1.5-16k</td>
+                                            <td>7B</td>
+                                            <td>1.8679</td>
+                                        </tr>  
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <figcaption style="text-align: center; width: 140%;">
+                                    Table 1: Final training loss during pretraining stage with original LLaVA pretraining data.
+                                </figcaption>
+                            </div>
                         </p>
-                    <d-figure id="fig-comparison" >
-                        <figure>
-                            <img data-zoomable="" draggable="false" src="static/img/bench_cat.png" alt="benchmark category">
-                            <figcaption>
-                                <strong>Figure 1:</strong> Analyzing the benchmarks.
-                                <strong>Left:</strong> Performance comparison of MLLMs with visual input enabled and disabled across various benchmarks. <strong>Right:</strong> Principal component analysis displaying clusters of benchmarks based on performance metrics, with bubble size corresponding to benchmark size.
-                            </figcaption>
-                        </figure>
-                    </d-figure>
+                        <p class="text">
+                            <strong>Token merging.</strong> 
+                            To increase the throughput of existing ViT models, Token Merging is proposed to gradually combines similar tokens in a transformer to reduce the number of tokens passing through ViT models. 
+                            Token Merging has been proven to be effective on image and video classification tasks even without the need for training.
+                            We conduct frame-wise token merging in AURORACAP, where the feature is extracted by CLIP ViT-H model. 
+                            We show token merging visualization examples from  COCO, VG, SA-1B as follows:
+                            <d-figure id="fig-cvcb" >
+                                <figure>
+                                    <img data-zoomable="" draggable="false" src="static/img/tome_visualize.png" alt="benchmark category">
+                                    <figcaption>
+                                        <strong>Figure 1:</strong> Token merging visualization. From top to bottom, the image IDs are COCO:COCO-train2014-000000247906, VG:2331508, SA-1B:sa-393200. From left to right, the number of tokens representing the images are 490, 154, 18, and 6.
+                                    </figcaption>
+                                </figure>
+                            </d-figure>
+                        </p>
+                        </p>
+                        <h2 class="text">Training Recipe</h2>
+                        <p class="text">
+                            <strong>Pretraining stage.</strong> 
+                            Similar to LLaVA, we first align visual features with the word embedding space of LLMs. 
+                            To achieve this, we freeze the pretrained ViT and LLM, training solely the vision-language connector. 
+                            Consistent with LLaVA-1.5, we employ a two-layer MLP as the projection layer and pretrain on 1.3M image-caption pairs.
+                        </p>
+                        <p class="text">
+                            <strong>Vision stage.</strong> 
+                            Unlike LLaVA, we next unfreeze the pretrained ViT while freezing the LLM during vision stage and train with the public data among various computer vision tasks (e.g., captioning, object identification, classification, reasoning, VQA, and etc.) to get better generalization.
+                            The motivation for doing this is that CLIP ViT usually performs poorly in aspects such as Orientation and Direction, Positional and Relational Context, Quantity and Count.
+                            However, since the most of the collected datasets lack high-quality and detailed corresponding language descriptions, the labels often consist of only a few words or a short phrase when converted to text.
+                            Therefore, unfreezing the language model at this stage is risky, as it may lead to a degradation in the performance of the language model.
+                        </p>
+                        <p class="text">
+                            <strong>Language stage.</strong> 
+                            Finally, we conduct end-to-end training, which means all the components are trainable, with the most high-quality public data during language stage. 
+                            We mix all the data, including images and videos, captions and instructions, into each mini-batch for training. 
+                            To improve caption performance, we duplicate the image and video captioning datasets twice. We remove all the video training data for image-based model model training.
+                        </p>
+                        <h2 class="text">Evaluation</h2>
+                        <p class="text">
+                            <strong>Image Captioning.</strong> 
+                            We evaluate AuroraCap using CIDEr, BELU-4, BELU-1, METEOR, and ROUGE-L metric on Flickr, NoCaps, and COCO-Cap benchmarks and compare it with LLM-based state-of-the-art methods. 
+                            AuroraCap shows good performance under zero-shot settings. 
+                            Notice that these benchmarks all contain short captions consisting of a single sentence, so they only partially reflect the model's performance.
+                            <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="table-container">
+                                    <table class="data-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="tb-hdr" rowspan="2">Model</th>
+                                            <th colspan="5" class="tb-hdr">Flickr (31,784)</th>
+                                            <th colspan="5" class="tb-hdr">NoCaps (4,500)</th>
+                                            <th colspan="5" class="tb-hdr">COCO-Cap (5,000)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>C</th>
+                                            <th>B@1</th>
+                                            <th>B@4</th>
+                                            <th>M</th>
+                                            <th>R</th>
+                                            <th>C</th>
+                                            <th>B@1</th>
+                                            <th>B@4</th>
+                                            <th>M</th>
+                                            <th>R</th>
+                                            <th>C</th>
+                                            <th>B@1</th>
+                                            <th>B@4</th>
+                                            <th>M</th>
+                                            <th>R</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="italic">LLaVA-1.5-7B (Liu et al., 2023)</td>
+                                                <td>74.9</td>
+                                                <td>71.7</td>
+                                                <td>28.4</td>
+                                                <td>26.1</td>
+                                                <td>52.8</td>
+                                                <td>105.5</td>
+                                                <td>82.6</td>
+                                                <td>40.2</td>
+                                                <td>30.3</td>
+                                                <td>59.4</td>
+                                                <td>110.3</td>
+                                                <td>73.0</td>
+                                                <td>29.7</td>
+                                                <td>29.2</td>
+                                                <td>55.5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>FrozenBiLM</td>
+                                                <td>24.7</td>
+                                                <td>—</td>
+                                                <td>32.2</td>
+                                                <td>—</td>
+                                                <td>16.8</td>
+                                                <td>—</td>
+                                                <td>26.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">LLaVA-1.5-13B</td>
+                                                <td>79.4</td>
+                                                <td>73.6</td>
+                                                <td>30.2</td>
+                                                <td>26.6</td>
+                                                <td>53.9</td>
+                                                <td>109.2</td>
+                                                <td>84.2</td>
+                                                <td>42.4</td>
+                                                <td class="highlight-red">30.6</td>
+                                                <td>60.3</td>
+                                                <td>115.6</td>
+                                                <td>74.6</td>
+                                                <td>31.5</td>
+                                                <td class="highlight-red">29.4</td>
+                                                <td>56.5</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">LLaVA-1.6-7B (Liu et al., 2024a)</td>
+                                                <td>68.4</td>
+                                                <td>69.6</td>
+                                                <td>26.6</td>
+                                                <td>23.2</td>
+                                                <td>50.3</td>
+                                                <td>88.4</td>
+                                                <td>73.8</td>
+                                                <td>34.8</td>
+                                                <td>25.9</td>
+                                                <td>54.6</td>
+                                                <td>99.9</td>
+                                                <td>67.7</td>
+                                                <td>28.4</td>
+                                                <td>25.5</td>
+                                                <td>52.4</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">LLaVA-1.6-13B</td>
+                                                <td>66.6</td>
+                                                <td>65.2</td>
+                                                <td>24.2</td>
+                                                <td>22.2</td>
+                                                <td>48.8</td>
+                                                <td>88.1</td>
+                                                <td>68.7</td>
+                                                <td>34.0</td>
+                                                <td>25.4</td>
+                                                <td>54.9</td>
+                                                <td>101.8</td>
+                                                <td>62.2</td>
+                                                <td>27.5</td>
+                                                <td>24.6</td>
+                                                <td>52.1</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">MiniCPM-V-3B (Hu et al., 2023)</td>
+                                                <td>66.8</td>
+                                                <td>68.0</td>
+                                                <td>25.1</td>
+                                                <td>27.2</td>
+                                                <td>51.0</td>
+                                                <td>89.9</td>
+                                                <td>79.1</td>
+                                                <td>33.2</td>
+                                                <td>29.7</td>
+                                                <td>55.8</td>
+                                                <td>94.2</td>
+                                                <td>69.8</td>
+                                                <td>23.9</td>
+                                                <td>28.3</td>
+                                                <td>52.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">DeCap (Li et al., 2023d)</td>
+                                                <td>56.7</td>
+                                                <td>—</td>
+                                                <td>21.2</td>
+                                                <td>21.8</td>
+                                                <td>—</td>
+                                                <td>42.7</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>91.2</td>
+                                                <td>—</td>
+                                                <td>24.7</td>
+                                                <td>25.0</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">Flamingo-80B (Alayrac et al., 2022)</td>
+                                                <td>67.2</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>84.3</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">Chameleon-34B (Team, 2024)</td>
+                                                <td>74.7<sup>2</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>120.2<sup>2</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">GPT-4V</td>
+                                                <td>55.3<sup>8</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>78.5<sup>8</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="italic">Gemini-1.5 Pro</td>
+                                                <td>82.2<sup>4</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>99.8<sup>2</sup></td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>AURORACAP-7B</strong></td>
+                                                <td class="highlight-red"><strong>88.9</strong></td>
+                                                <td class="highlight-red"><strong>75.6</strong></td>
+                                                <td class="highlight-red"><strong>32.8</strong></td>
+                                                <td class="highlight-red"><strong>26.7</strong></td>
+                                                <td class="highlight-red"><strong>55.4</strong></td>
+                                                <td class="highlight-red"><strong>111.4</strong></td>
+                                                <td class="highlight-red"><strong>85.6</strong></td>
+                                                <td class="highlight-red"><strong>44.4</strong></td>
+                                                <td>29.9</td>
+                                                <td class="highlight-red"><strong>60.6</strong></td>
+                                                <td class="highlight-red"><strong>120.8</strong></td>
+                                                <td class="highlight-red"><strong>78.0</strong></td>
+                                                <td class="highlight-red"><strong>35.3</strong></td>
+                                                <td>28.6</td>
+                                                <td class="highlight-red"><strong>57.2</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <figcaption style="text-align: center; width: 140%;">
+                                    Table 2: Comparison AuroraCap with SoTA methods on video question answering and classification benchmarks under zero-shot setting. The model size is 7B by default.
+                                </figcaption>
+                            </div>
+                        </p>
+                        <p class="text">
+                            <strong>Video Captioning.</strong> 
+                            Although the current video captioning benchmarks are only contains one-sentence captions, to compare with prior work, we similarly evaluate on these benchmarks. 
+                            We evaluate AuroraCap on MSR-VTT, VATEX, and ActivityNet Captions and compare it with other methods.
+                            <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="table-container">
+                                    <table class="data-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="tb-hdr" rowspan="2">Model</th>
+                                            <th colspan="5" class="tb-hdr">MSR-VTT (1,000)</th>
+                                            <th colspan="5" class="tb-hdr">VATEX (1,000)</th>
+                                        </tr>
+                                        <tr>
+                                            <th>C</th>
+                                            <th>B@1</th>
+                                            <th>B@4</th>
+                                            <th>M</th>
+                                            <th>R</th>
+                                            <th>C</th>
+                                            <th>B@1</th>
+                                            <th>B@4</th>
+                                            <th>M</th>
+                                            <th>R</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ZeroCap</td>
+                                                <td>9.6</td>
+                                                <td>—</td>
+                                                <td>2.9</td>
+                                                <td>16.3</td>
+                                                <td>35.4</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>DeCap</td>
+                                                <td>18.6</td>
+                                                <td>—</td>
+                                                <td>14.7</td>
+                                                <td>20.4</td>
+                                                <td>—</td>
+                                                <td>18.7</td>
+                                                <td>—</td>
+                                                <td>13.1</td>
+                                                <td>15.3</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>PaLI-3</td>
+                                                <td>21.3</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ma et al.</td>
+                                                <td>22.1</td>
+                                                <td>—</td>
+                                                <td>3.5</td>
+                                                <td>17.3</td>
+                                                <td>28.7</td>
+                                                <td>23.9</td>
+                                                <td>—</td>
+                                                <td>2.8</td>
+                                                <td>14.1</td>
+                                                <td>23.5</td>
+                                            </tr>
+                                            <tr>
+                                                <td>LLaVA-7B</td>
+                                                <td>16.9</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Video-LLAMA</td>
+                                                <td>2.3</td>
+                                                <td>—</td>
+                                                <td>4.9</td>
+                                                <td>16.8</td>
+                                                <td>—</td>
+                                                <td>3.8</td>
+                                                <td>—</td>
+                                                <td>4.3</td>
+                                                <td>16.3</td>
+                                                <td>21.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>AURORACAP-7B</td>
+                                                <td class="highlight-red">33.1</td>
+                                                <td class="highlight-red">58.6</td>
+                                                <td class="highlight-red">21.0</td>
+                                                <td class="highlight-red">23.9</td>
+                                                <td class="highlight-red">49.5</td>
+                                                <td class="highlight-red">33.8</td>
+                                                <td class="highlight-red">57.1</td>
+                                                <td class="highlight-red">18.4</td>
+                                                <td class="highlight-red">19.0</td>
+                                                <td class="highlight-red">40.8</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <figcaption style="text-align: center; width: 140%;">
+                                    Table 3: Comparison AuroraCap with SoTA methods on existing video captioning benchmarks under zero-shot setting.
+                                </figcaption>
+                            </div>
+                        </p>
+                        <p class="text">
+                            <strong>Video Question Answering.</strong> 
+                            We evaluate AuroraCap on MSVD-QA, ActivityNet-QA, MSRVTT-QA, and iVQA for video question answering tasks. 
+                            Although AuroraCap is primarily a captioning model, it achieves competitive performance in these tasks. 
+                            Despite token limits, AuroraCap generates longer answers than the ground truth, leading to lower scores.
+
+                            <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                                <div class="table-container">
+                                    <table class="data-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="tb-hdr">Model</th>
+                                            <th colspan="2" class="tb-hdr">ANet</th>
+                                            <th colspan="2" class="tb-hdr">MSVD</th>
+                                            <th colspan="2" class="tb-hdr">MSR-VTT</th>
+                                            <th class="tb-hdr">iVQA</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th>Acc</th>
+                                            <th>Score</th>
+                                            <th>Acc</th>
+                                            <th>Score</th>
+                                            <th>Acc</th>
+                                            <th>Score</th>
+                                            <th>Acc</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Just Ask</td>
+                                                <td colspan="2">—</td>
+                                                <td colspan="2">—</td>
+                                                <td colspan="2">—</td>
+                                                <td>12.2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>FrozenBiLM</td>
+                                                <td>24.7</td>
+                                                <td>—</td>
+                                                <td>32.2</td>
+                                                <td>—</td>
+                                                <td>16.8</td>
+                                                <td>—</td>
+                                                <td>26.8</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Video-LLAMA</td>
+                                                <td>12.4</td>
+                                                <td>1.1</td>
+                                                <td>51.6</td>
+                                                <td>2.5</td>
+                                                <td>29.6</td>
+                                                <td>1.8</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>VideoChat</td>
+                                                <td>26.5</td>
+                                                <td>2.2</td>
+                                                <td>56.3</td>
+                                                <td>2.8</td>
+                                                <td>45.0</td>
+                                                <td>2.5</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Video-ChatGPT</td>
+                                                <td>35.2</td>
+                                                <td>2.7</td>
+                                                <td>64.9</td>
+                                                <td>3.3</td>
+                                                <td>49.3</td>
+                                                <td>2.8</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>LLAMA-VID</td>
+                                                <td>47.4</td>
+                                                <td>3.3</td>
+                                                <td>69.7</td>
+                                                <td>3.7</td>
+                                                <td>57.7</td>
+                                                <td>3.2</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Video-LLAVA</td>
+                                                <td>45.3</td>
+                                                <td>3.3</td>
+                                                <td>70.7</td>
+                                                <td>3.9</td>
+                                                <td>59.2</td>
+                                                <td>3.5</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>FreeVA</td>
+                                                <td>51.2</td>
+                                                <td>3.5</td>
+                                                <td>73.8</td>
+                                                <td><span class="highlight-red">4.1</span></td>
+                                                <td><span class="highlight-red">60.0</strong></td>
+                                                <td><span class="highlight-red">3.5</strong></td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>LLAVA-NeXT-Video</td>
+                                                <td>53.5</td>
+                                                <td>3.2</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MovieChat</td>
+                                                <td>45.7</td>
+                                                <td>3.4</td>
+                                                <td>75.2</td>
+                                                <td>3.8</td>
+                                                <td>52.7</td>
+                                                <td>2.6</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td>MovieChat+</td>
+                                                <td>48.1</td>
+                                                <td>3.4</td>
+                                                <td><span class="highlight-red">76.5</span></td>
+                                                <td>3.9</td>
+                                                <td>53.9</td>
+                                                <td>2.7</td>
+                                                <td>—</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>AURORACAP-7B</strong></td>
+                                                <td class="highlight-red"><strong>61.8</strong></td>
+                                                <td class="highlight-red"><strong>3.8</strong></td>
+                                                <td>62.6</td>
+                                                <td>3.6</td>
+                                                <td>43.5</td>
+                                                <td>2.9</td>
+                                                <td class="highlight-red"><strong>55.2</strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <figcaption style="text-align: center; width: 140%;">
+                                    Table 4: Comparison AuroraCap with SoTA methods on video question answering and classification benchmarks under zero-shot setting. The model size is 7B by default.
+                                </figcaption>
+                            </div>
+                        </p>
             </div>
             
             <!-- <div id="sec:benchmarking" class="sub-section">
@@ -697,25 +1246,164 @@
             </div> -->
         </div>
 
-        <div id='connector_design' class="connector-block">
+        <div id='vdc' class="connector-block">
 
-            <h1 class="text">Spatial Vision Aggregator (SVA): A New Connector Design</h1>
+            <h1 class="text">VDC: A Video Detailed Captioning Benchmark</h1>
             <p class="text">
-                To effectively aggregate features from multiple vision encoders and reduce information loss during interpolation, we use a set of learnable latent queries that interact with multiple vision features through cross-attention layers<d-cite key="dai2024instructblip"></d-cite>.
-                In particular, our approach incorporates two new vision-centric design principles: 
+                <h2 class="text">Benchmark Dataset Curation</h2>
                 <ol class="text">
-                    <li>We encode spatial inductive bias by explicitly localizing the aggregation space for each token in the query.</li>
-                    <li>We perform vision feature aggregation multiple times across the LLM layers, allowing the model to repeatedly reference necessary visual information.</li>
+                    <li><strong>Video collection and processing.</strong>
+                        We building VDC upon Panda-70M, Ego4D, Mixkit, Pixabay, and Pexels. 
+                        Note that the videos used in VDC construction are not included in the training data of AuroraCap.
+                        To ensure balanced data distribution, we allocate equal proportions of different video sources.  
+                        We first split the video into clips and apply dense frame extraction, then manually replacing blurry frames with adjacent clear ones.
+                    </li>
+                    <li><strong>Structured detailed captions construction pipeline.</strong>
+                        We develop a structured detailed captions construction pipeline to generate extra detailed descriptions from various perspectives, significantly extending the length and enhancing the richness compared to previous benchmarks. 
+                        The structured captions in VDC encompass not only <strong>short</strong> and <strong>detailed captions</strong> but also three additional categories: (1) <strong>main object caption</strong>; (2) <strong>background caption</strong>; and (3) <strong>camera caption</strong>.
+                        To generate detailed, fine-grained, and accurate captions, we leverage <strong>GPT-4o</strong> to produce video descriptions. 
+                        We observed that generating all captions in a single conversation round often introduces hallucinations in the detailed captions. 
+                        To address this, we design a hierarchical prompt strategy to efficiently obtain accurate structured captions and detailed captions in two conversation rounds: (1) <strong>Structured Captions Generation</strong> and (2) <strong>Detailed Captions Integration</strong>. 
+                    </li>
+                    <li><strong>Comparison on numerical statistics.</strong>
+                        The visual representation in Figure 2 demonstrates the video duration distribution of VDC and the length distribution of structured captions in VDC. 
+                        <d-figure id="fig-vision_connector">
+                            <figure>
+                                <img data-zoomable="" draggable="false" src="static/img/vdc.png" alt="Video length in VDC" style="width: 80%;display: block; margin: 0 auto;">
+                                <figcaption>
+                                    <strong>Figure 2:</strong> Video length in VDC and distribution of structured caption length.
+                                </figcaption>
+                            </figure>
+                        </d-figure>
+                        As illustrated in Table 5, the average length of detailed descriptions in~\benchmark~is significantly longer than in previous benchmarks. 
+                        <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="tb-hdr">Dataset</th>
+                                        <th>Theme</th>
+                                        <th># Video</th>
+                                        <th># Clip</th>
+                                        <th># Caption</th>
+                                        <th># Word</th>
+                                        <th># Vocab.</th>
+                                        <th>Ave. Length</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">MSVD</td>
+                                        <td>Open</td>
+                                        <td>1,970</td>
+                                        <td>1,970</td>
+                                        <td>70,028</td>
+                                        <td>607,339</td>
+                                        <td>13,010</td>
+                                        <td>8.67</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="italic">MSR-VTT</td>
+                                            <td>Open</td>
+                                            <td>7,180</td>
+                                            <td>10,000</td>
+                                            <td>200,000</td>
+                                            <td>1,856,523</td>
+                                            <td>29,316</td>
+                                            <td>9.28</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">ActivityNet</td>
+                                            <td>Open</td>
+                                            <td>20,000</td>
+                                            <td>100,000</td>
+                                            <td>100,000</td>
+                                            <td>1,340,000</td>
+                                            <td>15,564</td>
+                                            <td>13.40</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">S-MiT</td>
+                                            <td>Open</td>
+                                            <td>515,912</td>
+                                            <td>515,912</td>
+                                            <td>515,912</td>
+                                            <td>5,618,064</td>
+                                            <td>50,570</td>
+                                            <td>10.89</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">M-VAD</td>
+                                            <td>Movie</td>
+                                            <td>92</td>
+                                            <td>48,986</td>
+                                            <td>55,905</td>
+                                            <td>519,933</td>
+                                            <td>18,269</td>
+                                            <td>9.30</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">MPII-MD</td>
+                                            <td>Movie</td>
+                                            <td>94</td>
+                                            <td>68,337</td>
+                                            <td>68,375</td>
+                                            <td>653,467</td>
+                                            <td>24,549</td>
+                                            <td>9.56</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">Youcook2</td>
+                                            <td>Cooking</td>
+                                            <td>2,000</td>
+                                            <td>15,400</td>
+                                            <td>15,400</td>
+                                            <td>121,418</td>
+                                            <td>2,583</td>
+                                            <td>7.88</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">Charades</td>
+                                            <td>Human</td>
+                                            <td>9,848</td>
+                                            <td>10,000</td>
+                                            <td>27,380</td>
+                                            <td>607,339</td>
+                                            <td>13,000</td>
+                                            <td>22.18</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">VATEX</td>
+                                            <td>Open</td>
+                                            <td>41,300</td>
+                                            <td>41,300</td>
+                                            <td>413,000</td>
+                                            <td>4,994,768</td>
+                                            <td>44,103</td>
+                                            <td>12.09</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="italic">VDC (ours)</td>
+                                            <td>Open</td>
+                                            <td>1,027</td>
+                                            <td>1,027</td>
+                                            <td>1,027</td>
+                                            <td>515,441</td>
+                                            <td>20,419</td>
+                                            <td class="highlight-red">500.91</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <figcaption style="text-align: center; width: 140%;">
+                                Table 5: Benchmark comparison for video captioning task. Ave. Length indicates the average number of words per caption. 
+                            </figcaption>
+                        </div>
+
+                    </li>
                 </ol>
             </p>
-            <d-figure id="fig-vision_connector">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/sva.png" alt="Spatial Vision Aggregator (SVA)">
-                    <figcaption>
-                        <strong>Figure 6:</strong> Spatial Vision Aggregator (SVA).
-                    </figcaption>
-                </figure>
-            </d-figure>
+
         </div>
 
         <div id="instruction_data" class="data-block">
