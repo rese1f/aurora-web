@@ -6,12 +6,12 @@ function cases() {
     var indicator_image_size = 60;
     var indicator_image_padding = 10;
 
-    var base_dir = 'static/img/cases/';
+    var base_dir = 'assets/vid/cases/';
     
     var indicator_data = [
-        { id: 'case_1', opacity: 1.0, title: 'Token Merging Visualization of COCO:COCO-train2014-000000247906'},
-        { id: 'case_2', opacity: 0.2, title: 'Token Merging Visualization of VG:2331508'},
-        { id: 'case_3', opacity: 0.2, title: 'Token Merging Visualization of SA-1B:sa-393200'},
+        { id: 'case_1', opacity: 1.0, title: ''},
+        { id: 'case_2', opacity: 0.2, title: ''},
+        { id: 'case_3', opacity: 0.2, title: ''},
     ];
 
     var container = d3.select('#cases_div')

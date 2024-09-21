@@ -8,7 +8,7 @@ body {
   /* background: linear-gradient(127deg, #265073 0%, #596FB7 45%, #C6CF9B 70%, rgb(244,234,203) 100%); */
   /* background: linear-gradient(-235deg, #000000 10%, #122153 55%, #FEAE6F 85%, rgb(244,234,203) 100%); */
   /* insert img assets/img/aurora.png as bg */
-  background-image: url('assets/img/aurora.png'); 
+  background-image: url('../img/aurora.png'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

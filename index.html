@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="template.v2.js"></script>
+        <script src="assets/js/template.v2.js"></script>
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://d3js.org/d3-collection.v1.min.js"></script>
         <script src="https://rawgit.com/nstrayer/slid3r/master/dist/slid3r.js"></script>
-        <script src="cross_fade.js"></script>
+        <script src="assets/js/cross_fade.js"></script>
         <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.35.2/gradio.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="assets/css/style.css">
         <!-- <link rel="icon" type="favicon/png" href="favicon.png"> -->
         
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
@@ -162,7 +162,7 @@
                         <figure class="l-body">
                             <div id='tomevis_div'></div>
                             <script src="https://d3js.org/d3.v7.min.js"></script>
-                            <script src="tome_vis.js"></script>
+                            <script src="assets/js/tome_vis.js"></script>
                             <figcaption>
                                 Token merging visualization. From left to right, the number of visual tokens representing the images are 490, 154, 18, and 6.
                             </figcaption>
@@ -842,15 +842,15 @@
                         <figure class="l-body">
                             <div id='tome_div'></div>
                             <script src="https://d3js.org/d3.v7.min.js"></script>
-                            <script src="tome_curve.js"></script>
+                            <script src="assets/js/tome_curve.js"></script>
                             <figcaption>
                                 Click the small images at the bottom to switch benchmark results. 
                             </figcaption>
                         </figure>
                     </d-figure>
-                    
+
                     To assess the inference speed, we utilize the inference time per video question-answering pair in seconds (TPV) as an evaluative metric. 
-                    Figure 6 indicates the minimum TPV achievable in our settings including with or without token merging and SGLang across seven video understanding datasets. 
+                    Figure below indicates the minimum TPV achievable in our settings including with or without token merging and SGLang across seven video understanding datasets. 
                     Reducing the visual tokens and using SGLang result in excellent inference times per video question-answering pair while all the datasets with short video and question inputs. 
                     <d-figure id="fig-vision_connector">
                         <figure>
@@ -872,22 +872,16 @@
             <p class="text">
                 We perform an extensive case study of AuroraCap on a variety of videos for video detailed captioning. 
                 As shown as followings, AuroraCap is capable of providing excellent detailed captions regarding the camera motion, background and main object with less hallucination. 
-                <br>
-                <!-- <div id="cases_container" style="position: relative;">
+
+                <div id="cases_container" style="position: relative;">
                     <div id="cases_div">
                         <div id="video_overlay" style="position: absolute; top: 30px; left: 0;">
                             <script src="https://d3js.org/d3.v7.min.js"></script>
-                            <script src="cases.js"></script>
+                            <script src="assets/js/cases.js"></script>
                         </div>
                     </div>
-                </div> -->
-
-
                     
-
-                    <strong>Figure 5:</strong> Click the small images at the bottom to switch video understanding tasks. 
-
-
+                </div>
             </p>
 
         </section>
@@ -919,7 +913,7 @@
         <!-- <script type="text/bibliography">
         
         </script> -->
-        <script src="contents_bar.js"></script>
+        <script src="assets/js/contents_bar.js"></script>
         
         
 
