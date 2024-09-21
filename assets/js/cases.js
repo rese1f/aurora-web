@@ -3,15 +3,15 @@ function cases() {
     var margin = {top: 30, right: 0, bottom: 10, left: 0};
     var image_size_width = static_width - margin.left - margin.right;
 
-    var indicator_image_size = 60;
+    var indicator_image_size = 132;
     var indicator_image_padding = 10;
 
     var base_dir = 'assets/vid/cases/';
     
     var indicator_data = [
-        { id: 'case_1', opacity: 1.0, title: 'case 1'},
-        { id: 'case_2', opacity: 0.2, title: 'case 2'},
-        { id: 'case_3', opacity: 0.2, title: 'case 3'},
+        { id: 'case_1', opacity: 1.0, title: '[Detailed Caption] The video depicts a serene beach scene where a young woman stands on the sandy shore, gazing out towards the ocean. She is wearing a black beanie and a pink jacket, adding a pop of color to the otherwise muted scene. The beach, a vast expanse of sand, stretches out in front of her, meeting the ocean at the horizon. The ocean, a vast body of water, is visible in the background. The beach is bathed in a soft, diffused light, creating a dreamy atmosphere. The girls gaze is directed towards the horizon, suggesting a sense of wonder or contemplation. The image is slightly blurred, adding a dreamy quality to the scene. The womans position on the beach, coupled with the gentle waves of the ocean, suggests a moment of contemplation or admiration. The relative positions of the objects suggest a peaceful day at the beach, with the girl possibly enjoying the serene view of the ocean. The colors are mostly muted, with the girls pink jacket standing out against the sandy beach and the blue ocean. The blurred background and the out-of-focus elements, such as the ocean and the sky, contribute to the sense of tranquility and focus on the woman. There is no text present in the video, and the colors are muted, with the exception of the pink jacket, which stands out against the more subdued tones of the surroundings.'},
+        { id: 'case_2', opacity: 0.2, title: '[Detailed Caption] The video features a man with a beard and long hair, lying on the ground with his head resting on a tree trunk. He is wearing a colorful shirt with a mix of orange and green patterns. The mans face is partially obscured by the tree trunk, but his eyes are visible, looking upwards. He appears to be smiling or laughing, with his mouth open. The mans arms are crossed over his chest, suggesting a relaxed or playful posture. The background is blurred, but it appears to be a natural outdoor setting, possibly a forest or park. In the background, another person is partially visible, their presence subtly hinted at by a hand reaching out from the left side of the frame. The colors in the video are warm, with the mans shirt standing out against the muted background. The mans hair and beard are dark, and he has a light complexion. The overall mood of the video is lighthearted and carefree. There are no visible texts or other objects in the video, and the relative positions of the objects remain constant with the man in the foreground and the second person in the background.'},
+        { id: 'case_3', opacity: 0.2, title: '[Detailed Caption] The video depicts a dynamic scene of a green car in motion on a winding road. The car, a vibrant blue sedan, is seen navigating through the curves of the road, moving from the left side of the frame to the right. Its a bright, sunny day, and the road appears to be wet, possibly from recent rain. The cars vibrant green color stands out against the gray road and the greenery of the surrounding grassy areas. In the distance, a white car is visible, adding to the sense of motion and activity in the scene. The surrounding landscape is lush and green, with mountains and trees visible in the background. The road itself is a narrow, two-lane road with a white line marking its center. The weather appears to be clear and sunny, with the sky visible in the top right corner of the frame. The cars movement is smooth and controlled, suggesting it is driving at a moderate speed. There are no visible texts or other objects that can be counted or located relative to each other in the video.'},
     ];
 
     var container = d3.select('#cases_div')
@@ -47,9 +47,9 @@ function cases() {
         // Title
         video_overlay.append('div')
             .attr('id', 'display_image_fig1_title')
-            .style('text-align', 'center')
-            .style('font-weight', 'bold')
-            .style('margin-top', '10px');
+            .style('text-align', 'left')
+            // .style('font-weight', 'bold')
+            .style('margin-top', '8px');
 
         // Indicator videos
         indicator_group.selectAll('foreignObject')
@@ -74,9 +74,6 @@ function cases() {
                     .attr('type', 'video/mp4');
             })
             .on('click', select_new_video);
-
-        // Initialize with the first video
-        select_new_video(null, indicator_data[0]);
     }
 
     function select_new_video(event, d) {
@@ -99,7 +96,7 @@ function cases() {
             
             video.attr('height', new_height);
             
-            updateContainerHeight(new_height);
+            // updateContainerHeight(new_height);
         });
 
         // Play all indicator videos
@@ -109,6 +106,7 @@ function cases() {
     }
 
     image_init();
+    select_new_video(null, indicator_data[0]);
 }
 
-document.addEventListener('DOMContentLoaded', cases);
+cases();

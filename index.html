@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <title>AuroraCap</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="assets/js/template.v2.js"></script>
@@ -522,14 +523,14 @@
                                         <td class="italic">LLAVA-1.6-13B</td>
                                         <td>35.61</td>
                                         <td>31.90</td>
-                                        <td><strong>38.90</strong></td>
+                                        <td class="highlight-red">38.90</td>
                                         <td>36.65</td>
                                         <td>36.18</td>
                                     </tr>
                                     <tr>
                                         <td class="italic">ShareGPT4Video-8B</td>
                                         <td>33.28</td>
-                                        <td><strong>39.05</strong></td>
+                                        <td class="highlight-red">39.05</td>
                                         <td>35.77</td>
                                         <td>37.12</td>
                                         <td>35.62</td>
@@ -547,16 +548,16 @@
                                         <td>39.08</td>
                                         <td>33.02</td>
                                         <td>37.47</td>
-                                        <td><strong>44.16</strong></td>
+                                        <td class="highlight-red">44.16</td>
                                         <td>34.89</td>
                                     </tr>
                                     <tr>
                                         <td><strong>AuroraCap-7B</strong></td>
-                                        <td><strong>43.50</strong></td>
+                                        <td class="highlight-red">43.50</td>
                                         <td>32.07</td>
                                         <td>35.92</td>
                                         <td>39.02</td>
-                                        <td><strong>41.30</strong></td>
+                                        <td class="highlight-red">41.30</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -872,18 +873,14 @@
             <p class="text">
                 We perform an extensive case study of AuroraCap on a variety of videos for video detailed captioning. 
                 As shown as followings, AuroraCap is capable of providing excellent detailed captions regarding the camera motion, background and main object with less hallucination. 
-
-                <!-- <div id="cases_container" style="position: relative;"> -->
-                    <div id="cases_div">
-                        <div id="video_overlay">
-                            <script src="https://d3js.org/d3.v7.min.js"></script>
-                            <script src="assets/js/cases.js"></script>
-                        </div>
-                    </div>
-                    
-                <!-- </div> -->
             </p>
 
+            <div id="cases_div">
+                <div id="video_overlay">
+                    <script src="assets/js/cases.js"></script>
+                </div>
+            </div>
+            
         </section>
 
         

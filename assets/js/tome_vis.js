@@ -3,7 +3,7 @@ function tome_vis() {
     var margin = {top: 30, right: 0, bottom: 10, left: 0};
     var image_size_width = static_width - margin.left - margin.right;
 
-    var indicator_image_size = 60;
+    var indicator_image_size = 226;
     var indicator_image_padding = 10;
 
     var base_dir = 'assets/img/tome_vis/';
