@@ -6,16 +6,16 @@ function tome_vis() {
     var indicator_image_size = 60;
     var indicator_image_padding = 10;
 
-    var base_dir = 'static/img/tome_vis/';
+    var base_dir = 'assets/img/tome_vis/';
     
     var image_data = [
-        { id: 'display_image_fig1', title: 'Token Merging Visualization of COCO:COCO-train2014-000000247906'},
+        { id: 'display_image_fig1', title: 'COCO:COCO-train2014-000000247906'},
     ];
 
     var indicator_data = [
-        { id: 'vis_1', opacity: 1.0, title: 'Token Merging Visualization of COCO:COCO-train2014-000000247906'},
-        { id: 'vis_2', opacity: 0.2, title: 'Token Merging Visualization of VG:2331508'},
-        { id: 'vis_3', opacity: 0.2, title: 'Token Merging Visualization of SA-1B:sa-393200'},
+        { id: 'vis_1', opacity: 1.0, title: 'COCO:COCO-train2014-000000247906'},
+        { id: 'vis_2', opacity: 0.2, title: 'VG:2331508'},
+        { id: 'vis_3', opacity: 0.2, title: 'SA-1B:sa-393200'},
     ];
 
     var container = d3.select('#tomevis_div')

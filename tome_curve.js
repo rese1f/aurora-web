@@ -6,7 +6,7 @@ function tome_curve() {
     var indicator_image_size = 60;
     var indicator_image_padding = 10;
 
-    var base_dir = 'static/img/tome_curve/';
+    var base_dir = 'assets/img/tome_curve/';
     
     var image_data = [
         { id: 'display_image_fig1', title: 'Ablation Study of Token Merging on VDC'},
