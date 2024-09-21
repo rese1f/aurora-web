@@ -77,7 +77,7 @@
                 <div class="header-content">
                     <h1 style="margin-top: 0px">AuroraCap</h1>
                     <h2>Less is More for Efficient Video Detailed Captioning and a New Benchmark</h2>
-                        <p>
+                        <p class="text">
                             AuroraCap is a multimodal LLM designed for image and video detailed captioning. We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
                         </p>
                     
@@ -678,14 +678,8 @@
                                         </tr>
                                         <tr>
                                             <th>C</th>
-                                            <th>B@1</th>
-                                            <th>B@4</th>
-                                            <th>M</th>
                                             <th>R</th>
                                             <th>C</th>
-                                            <th>B@1</th>
-                                            <th>B@4</th>
-                                            <th>M</th>
                                             <th>R</th>
                                         </tr>
                                         </thead>
@@ -693,13 +687,7 @@
                                             <tr>
                                                 <td>ZeroCap</td>
                                                 <td>9.6</td>
-                                                <td>—</td>
-                                                <td>2.9</td>
-                                                <td>16.3</td>
                                                 <td>35.4</td>
-                                                <td>—</td>
-                                                <td>—</td>
-                                                <td>—</td>
                                                 <td>—</td>
                                                 <td>—</td>
                                             </tr>
@@ -790,160 +778,7 @@
                                 </figcaption>
                             </div>
                         </p>
-                        <p class="text">
-                            <strong>Video Question Answering.</strong> 
-                            We evaluate AuroraCap on MSVD-QA, ActivityNet-QA, MSRVTT-QA, and iVQA for video question answering tasks. 
-                            Although AuroraCap is primarily a captioning model, it achieves competitive performance in these tasks. 
-                            Despite token limits, AuroraCap generates longer answers than the ground truth, leading to lower scores.
 
-                            <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
-                                <div class="table-container">
-                                    <table class="data-table">
-                                        <thead>
-                                        <tr>
-                                            <th class="tb-hdr">Model</th>
-                                            <th colspan="2" class="tb-hdr">ANet</th>
-                                            <th colspan="2" class="tb-hdr">MSVD</th>
-                                            <th colspan="2" class="tb-hdr">MSR-VTT</th>
-                                            <th class="tb-hdr">iVQA</th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>Acc</th>
-                                            <th>Score</th>
-                                            <th>Acc</th>
-                                            <th>Score</th>
-                                            <th>Acc</th>
-                                            <th>Score</th>
-                                            <th>Acc</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Just Ask</td>
-                                                <td colspan="2">—</td>
-                                                <td colspan="2">—</td>
-                                                <td colspan="2">—</td>
-                                                <td>12.2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>FrozenBiLM</td>
-                                                <td>24.7</td>
-                                                <td>—</td>
-                                                <td>32.2</td>
-                                                <td>—</td>
-                                                <td>16.8</td>
-                                                <td>—</td>
-                                                <td>26.8</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Video-LLAMA</td>
-                                                <td>12.4</td>
-                                                <td>1.1</td>
-                                                <td>51.6</td>
-                                                <td>2.5</td>
-                                                <td>29.6</td>
-                                                <td>1.8</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>VideoChat</td>
-                                                <td>26.5</td>
-                                                <td>2.2</td>
-                                                <td>56.3</td>
-                                                <td>2.8</td>
-                                                <td>45.0</td>
-                                                <td>2.5</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Video-ChatGPT</td>
-                                                <td>35.2</td>
-                                                <td>2.7</td>
-                                                <td>64.9</td>
-                                                <td>3.3</td>
-                                                <td>49.3</td>
-                                                <td>2.8</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>LLAMA-VID</td>
-                                                <td>47.4</td>
-                                                <td>3.3</td>
-                                                <td>69.7</td>
-                                                <td>3.7</td>
-                                                <td>57.7</td>
-                                                <td>3.2</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Video-LLAVA</td>
-                                                <td>45.3</td>
-                                                <td>3.3</td>
-                                                <td>70.7</td>
-                                                <td>3.9</td>
-                                                <td>59.2</td>
-                                                <td>3.5</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>FreeVA</td>
-                                                <td>51.2</td>
-                                                <td>3.5</td>
-                                                <td>73.8</td>
-                                                <td><span class="highlight-red">4.1</span></td>
-                                                <td><span class="highlight-red">60.0</strong></td>
-                                                <td><span class="highlight-red">3.5</strong></td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>LLAVA-NeXT-Video</td>
-                                                <td>53.5</td>
-                                                <td>3.2</td>
-                                                <td>—</td>
-                                                <td>—</td>
-                                                <td>—</td>
-                                                <td>—</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MovieChat</td>
-                                                <td>45.7</td>
-                                                <td>3.4</td>
-                                                <td>75.2</td>
-                                                <td>3.8</td>
-                                                <td>52.7</td>
-                                                <td>2.6</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td>MovieChat+</td>
-                                                <td>48.1</td>
-                                                <td>3.4</td>
-                                                <td><span class="highlight-red">76.5</span></td>
-                                                <td>3.9</td>
-                                                <td>53.9</td>
-                                                <td>2.7</td>
-                                                <td>—</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>AuroraCap-7B</strong></td>
-                                                <td class="highlight-red"><strong>61.8</strong></td>
-                                                <td class="highlight-red"><strong>3.8</strong></td>
-                                                <td>62.6</td>
-                                                <td>3.6</td>
-                                                <td>43.5</td>
-                                                <td>2.9</td>
-                                                <td class="highlight-red"><strong>55.2</strong></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <figcaption style="text-align: center; width: 140%;">
-                                    Table 4: Comparison AuroraCap with SoTA methods on video question answering and classification benchmarks under zero-shot setting. The model size is 7B by default.
-                                </figcaption>
-                            </div>
-                        </p>
             </div>
             
             <!-- <div id="sec:benchmarking" class="sub-section">
