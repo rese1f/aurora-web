@@ -9,15 +9,15 @@ function cases() {
     var base_dir = 'assets/vid/cases/';
     
     var indicator_data = [
-        { id: 'case_1', opacity: 1.0, title: ''},
-        { id: 'case_2', opacity: 0.2, title: ''},
-        { id: 'case_3', opacity: 0.2, title: ''},
+        { id: 'case_1', opacity: 1.0, title: 'case 1'},
+        { id: 'case_2', opacity: 0.2, title: 'case 2'},
+        { id: 'case_3', opacity: 0.2, title: 'case 3'},
     ];
 
     var container = d3.select('#cases_div')
         .append('svg')
         .attr('width', static_width)
-        .attr('id', 'tome_svg');
+        .attr('id', 'case_svg');
 
     var video_overlay = d3.select('#video_overlay');
 

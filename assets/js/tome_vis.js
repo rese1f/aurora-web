@@ -21,7 +21,7 @@ function tome_vis() {
     var container = d3.select('#tomevis_div')
         .append('svg')
         .attr('width', static_width)
-        .attr('id', 'tome_svg');
+        .attr('id', 'tomevis_svg');
 
     var image_group = container
         .append('g')
