@@ -131,7 +131,7 @@ margin: 0 auto;
 .header-content h2 {
   font-size: 1.7em;
   /* text no wrap */
-  white-space: nowrap;
+  /* white-space: nowrap; */
   margin-top: 0;
 }
 
