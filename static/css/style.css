@@ -1036,12 +1036,11 @@ d-article > div > h3 {
 }
 
 
-.text {
+/* .text { */
   /* width: 150%; */
-  width: 150%;
-  margin: 1em 0 1em -20%;
-  font-size: 1.2rem;
-}
+  /* margin: 1em 0 1em -20%; */
+  /* font-size: 1.2rem; */
+/* } */
 
 h1.text {
     font-size: 2em;
