@@ -433,31 +433,19 @@
                     </div>
                 </p>
             </p>
-            <!-- <p>
-                Multimodal LLMs (MLLMs) <d-cite key="blip2"></d-cite><d-cite key="flamingo"></d-cite><d-cite key="minigpt4"></d-cite><d-cite key="llava"></d-cite><d-cite key="InstructBLIP"></d-cite>  try to emulate humans' ability to integrate multimodal information and perform general tasks. Significant advances have been made in this domain, leveraging the strong reasoning capabilities of large language models.
-                However, a key limitation of current MLLMs is their dependence on pre-trained (and often frozen) vision encoders, such as the CLIP <d-cite key="CLIP"></d-cite> image encoder. This dependency forms a major bottleneck for visual information processing. 
-                The vision encoder is often trained on images with low resolution, such as 224&times;224 or 336&times;336 pixels. During deployment, images are also often resized to a lower resolution. As a result, the encoder may overlook important details in high-resolution images. Additionally, current MLLMs struggle to identify which essential visual details are missing or unclear in the images they process, nor can they proactively seek out or request this missing information. In such senarios, even the most powerfull multimodal intelligent system GPT-4V would fail while our MLLM with visual search mechanism can make correct responses.
-                <d-figure>
-                    <figure class="l-body">
-                        <div id='figure1_div'></div>
-                        <script src="figure1.js"></script>
-                        <figcaption>
-                            Examples on which GPT-4V fails while SEAL with the <i>V</i><sup>*</sup> visual search mechanism succeeds. Even though GPT-4V has a much more powerful LLM (GPT-4) than ours (Vicuna-7B), it still occasionally struggles in scenarios that demand extensive visual processing. These situations require precise visual grounding in high-resolution images, a task where the visual search mechanism becomes essential. Click the small images at the bottom to choose different examples.
-                        </figcaption>
-                    </figure>
-                </d-figure>
-            </p> -->
+
         </section>
         <section id="vdc">
             <h2>VDC: A Video Detailed Captioning Benchmark</h2>
             <p class="text">
                 <h1 class="text">Benchmark Dataset Curation</h1>
-                <strong>Video collection and processing.</strong>
+                <strong>Video Collection and Processing</strong>
+                    <br>
                     We building VDC upon Panda-70M, Ego4D, Mixkit, Pixabay, and Pexels. 
-                    Note that the videos used in VDC construction are not included in the training data of AuroraCap.
-                    To ensure balanced data distribution, we allocate equal proportions of different video sources.  
                     We first split the video into clips and apply dense frame extraction, then manually replacing blurry frames with adjacent clear ones.
-                <strong>Structured detailed captions construction pipeline.</strong>
+                    <br>
+                <strong>Structured Detailed Captions Construction Pipeline</strong>
+                    <br>
                     We develop a structured detailed captions construction pipeline to generate extra detailed descriptions from various perspectives, significantly extending the length and enhancing the richness compared to previous benchmarks. 
                     The structured detailed captions includes the following categories:
                     <ol class="text">
@@ -479,8 +467,9 @@
                     </ol>
                     To generate detailed, fine-grained, and accurate captions, we leverage <b>GPT-4o</b> to produce video descriptions. 
                     We design a hierarchical prompt strategy to efficiently obtain accurate structured captions and detailed captions in two conversation rounds: (1) Structured Captions Generation and (2) Detailed Captions Integration. 
-                <br>
-                <strong>Comparison on numerical statistics.</strong>
+                    <br>
+                <strong>Comparison on Numerical Statistics</strong>
+                    <br>
                     The visual representation in Figure 2 demonstrates the video duration distribution of VDC and the length distribution of structured captions in VDC. 
                     <d-figure id="fig-vision_connector">
                         <figure>
@@ -495,44 +484,207 @@
             <p class="text">
                 <h1 class="text">Evaluation Metric Design and Leaderboard</h1>
                 <strong>VDCScore: Evaluating Detailed Captions with LLMs</strong>
-                    We building VDC upon Panda-70M, Ego4D, Mixkit, Pixabay, and Pexels. 
-                    Note that the videos used in VDC construction are not included in the training data of AuroraCap.
-                    To ensure balanced data distribution, we allocate equal proportions of different video sources.  
-                    We first split the video into clips and apply dense frame extraction, then manually replacing blurry frames with adjacent clear ones.
-                <strong>Structured detailed captions construction pipeline.</strong>
-                    We develop a structured detailed captions construction pipeline to generate extra detailed descriptions from various perspectives, significantly extending the length and enhancing the richness compared to previous benchmarks. 
-                    The structured detailed captions includes the following categories:
-                    <ol class="text">
-                        <li><strong>Camera caption.</strong>
-                            Describe the camera work in detail, including shot types, angles, movements, transitions, and any special effects used to enhance the video.
-                        </li>
-                        <li><strong>Short caption.</strong>
-                            Summarize the video in one detailed sentence, capturing key actions and the overall mood.
-                        </li>
-                        <li><strong>Background caption.</strong>
-                            Provide a detailed description of the background, including objects, location, weather, time, and any dynamic elements.
-                        </li>
-                        <li><strong>Main Object caption.</strong>
-                            Give a thorough description of the main subject’s actions, attributes, interactions, and movements throughout the video frames.
-                        </li>
-                        <li><strong>Detailed caption.</strong>
-                            Generate a detailed, vivid caption for the video, covering all categories, ensuring it’s engaging, informative, and rich enough for AI to recreate the video content.
-                        </li>
-                    </ol>
-                    To generate detailed, fine-grained, and accurate captions, we leverage <b>GPT-4o</b> to produce video descriptions. 
-                    We design a hierarchical prompt strategy to efficiently obtain accurate structured captions and detailed captions in two conversation rounds: (1) Structured Captions Generation and (2) Detailed Captions Integration. 
-                <br>
-                <strong>Comparison on numerical statistics.</strong>
-                    The visual representation in Figure 2 demonstrates the video duration distribution of VDC and the length distribution of structured captions in VDC. 
+                    <br>
+                    We introduce VDCScore, a novel quantitative metric that utilizes LLMs to evaluate the similarity between predicted and ground-truth detailed captions through a divide-and-conquer approach.
+                    As illustrated in Figure 3, the core idea of VDCScore is to decompose long detailed captions into multiple short question-answering pairs, avergae the evaluation of each pair as the final result.
                     <d-figure id="fig-vision_connector">
                         <figure>
-                            <img data-zoomable="" draggable="false" src="static/img/vdc.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
+                            <img data-zoomable="" draggable="false" src="static/img/vdcscore.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
                             <figcaption>
-                                <strong>Figure 2:</strong> Video length in VDC and distribution of structured caption length.
+                                <strong>Figure 3:</strong> VDCScore evaluation pipeline.
                             </figcaption>
                         </figure>
                     </d-figure>
-
+                <strong>Benchmarking Video Detailed Captioning</strong>
+                    <br>
+                    As illustrated in Table 4, we present a quantitative comparison between AuroraCap with existing state-of-the-art multimodal LLMs across various sections of structured captions within VDC. 
+                    <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                <tr>
+                                    <th class="tb-hdr">Model</th>
+                                    <th class="tb-hdr">Camera</th>
+                                    <th class="tb-hdr">Short</th>
+                                    <th class="tb-hdr">Background</th>
+                                    <th class="tb-hdr">Main Object</th>
+                                    <th class="tb-hdr">Detailed</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="italic">Vicuna-v1.5-7B</td>
+                                        <td>21.68</td>
+                                        <td>23.06</td>
+                                        <td>22.02</td>
+                                        <td>22.64</td>
+                                        <td>23.09</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">Llama-3.1-8B</td>
+                                        <td>17.83</td>
+                                        <td>17.90</td>
+                                        <td>19.52</td>
+                                        <td>19.57</td>
+                                        <td>20.10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">Gemini-1.5 Pro</td>
+                                        <td>38.68</td>
+                                        <td>35.71</td>
+                                        <td>43.84</td>
+                                        <td>47.32</td>
+                                        <td>43.11</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAMA-VID</td>
+                                        <td>39.47</td>
+                                        <td>29.92</td>
+                                        <td>28.01</td>
+                                        <td>31.24</td>
+                                        <td>25.67</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">Video-ChatGPT-7B</td>
+                                        <td>37.46</td>
+                                        <td>29.36</td>
+                                        <td>33.68</td>
+                                        <td>30.47</td>
+                                        <td>24.61</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">VILA-7B</td>
+                                        <td>34.33</td>
+                                        <td>30.40</td>
+                                        <td>35.15</td>
+                                        <td>33.38</td>
+                                        <td>29.78</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">Video-LLAVA-7B</td>
+                                        <td>37.48</td>
+                                        <td>30.67</td>
+                                        <td>32.50</td>
+                                        <td>36.01</td>
+                                        <td>27.36</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-1.5-7B</td>
+                                        <td>38.38</td>
+                                        <td>28.61</td>
+                                        <td>34.86</td>
+                                        <td>34.62</td>
+                                        <td>33.43</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LongVA-7B</td>
+                                        <td>35.32</td>
+                                        <td>31.94</td>
+                                        <td>36.39</td>
+                                        <td>40.95</td>
+                                        <td>27.91</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-1.5-13B</td>
+                                        <td>38.97</td>
+                                        <td>30.89</td>
+                                        <td>34.79</td>
+                                        <td>36.27</td>
+                                        <td>33.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-NeXT-V7B</td>
+                                        <td>39.73</td>
+                                        <td>30.63</td>
+                                        <td>36.54</td>
+                                        <td>36.54</td>
+                                        <td>33.84</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-1.6-7B</td>
+                                        <td>36.50</td>
+                                        <td>31.91</td>
+                                        <td>37.58</td>
+                                        <td>36.03</td>
+                                        <td>36.47</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-1.6-13B</td>
+                                        <td>35.61</td>
+                                        <td>31.90</td>
+                                        <td><strong>38.90</strong></td>
+                                        <td>36.65</td>
+                                        <td>36.18</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">ShareGPT4Video-8B</td>
+                                        <td>33.28</td>
+                                        <td><strong>39.05</strong></td>
+                                        <td>35.77</td>
+                                        <td>37.12</td>
+                                        <td>35.62</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">LLAVA-OV-7B</td>
+                                        <td>37.82</td>
+                                        <td>32.58</td>
+                                        <td>37.43</td>
+                                        <td>38.21</td>
+                                        <td>41.20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="italic">InternVL-2-8B</td>
+                                        <td>39.08</td>
+                                        <td>33.02</td>
+                                        <td>37.47</td>
+                                        <td><strong>44.16</strong></td>
+                                        <td>34.89</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>AuroraCap-7B</strong></td>
+                                        <td><strong>43.50</strong></td>
+                                        <td>32.07</td>
+                                        <td>35.92</td>
+                                        <td>39.02</td>
+                                        <td><strong>41.30</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <figcaption style="text-align: center; width: 140%;">
+                            Table 4: Comparison of AuroraCap with LLM-based baseline methods on VDCScore under zero-shot structured captions setting. 
+                        </figcaption>
+                    </div>
+                    <br>
+                    Furthermore, Figure 4 illustrates a schematic diagram of the performance and efficiency of different video training models. 
+                    Since the comparison of model inference time under different architectures, models, deployment frameworks, and output lengths is unfair, so we used the number of visual tokens as a representation of efficiency. 
+                    AuroraCap achieves superior performance in video detailed captioning while utilizing significantly fewer visual tokens than other models, fully highlighting the efficiency of AuroraCap. 
+                    <d-figure id="fig-vision_connector">
+                        <figure>
+                            <img data-zoomable="" draggable="false" src="static/img/vdc_benchmaark.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
+                            <figcaption>
+                                <strong>Figure 4:</strong> Comparison between various models with different number of visual tokens input on VDC.
+                            </figcaption>
+                        </figure>
+                    </d-figure>
+                <strong>Ablation Study on Token Merging Ratio</strong>
+                    <br>
+                    As a core strategy of  AuroraCap, token merging plays a significant role in reducing the number of visual tokens. 
+                    We further study how the video detailed captioning capability is influenced by token merge ratio. 
+                    We define the performance percentage as the proportion between the highest and lowest values on the entire performance curve. 
+                    We highlight the token merging ratio when achieving 90% and 80% performance with the dash line and filled area.
+                    As shown in Figure 5, most models maintain satisfactory performance (>80%) even with only 0.2 of visual token kept ratio. 
+                    We found that token merging significantly reduces the number of tokens while maintaining minimal performance drop, and even showing improvement in some aspects. 
+                    <d-figure>
+                        <figure class="l-body">
+                            <div id='tome_div'></div>
+                            <script src="https://d3js.org/d3.v7.min.js"></script>
+                            <script src="tome_curve.js"></script>
+                            <figcaption>
+                                Ablation study of token merging on various video understanding tasks. Click the small images at the bottom to switch video understanding tasks. 
+                            </figcaption>
+                        </figure>
+                    </d-figure>
             </p>
 
             <h3 id="VQALLM">VQA LLM with Visual Working Memory</h3>
