@@ -38,7 +38,7 @@ function cases() {
     function image_init() {
         // Main video
         video_overlay.append('video')
-            .attr('id', 'display_image_fig1')
+            .attr('id', 'display_case_video1')
             .attr('width', image_size_width)
             .attr('controls', true)
             .append('source')
@@ -46,7 +46,7 @@ function cases() {
 
         // Title
         video_overlay.append('div')
-            .attr('id', 'display_image_fig1_title')
+            .attr('id', 'display_case_video1_title')
             .style('text-align', 'left')
             // .style('font-weight', 'bold')
             .style('margin-top', '8px');
@@ -80,14 +80,13 @@ function cases() {
         indicator_group.selectAll('foreignObject')
             .attr('opacity', item => item.id === d.id ? 1.0 : 0.2);
         
-        var video = d3.select('#display_image_fig1');
+        var video = d3.select('#display_case_video1');
         var source = video.select('source');
         
-        source.attr('src', `${base_dir}${d.id}.mp4`);
-        
+        source.attr('src', `${base_dir}${d.id}.mp4`)
         video.node().load(); // Force the video to load
         
-        d3.select('#display_image_fig1_title')
+        d3.select('#display_case_video1_title')
             .text(d.title);
 
         video.on('loadedmetadata', function() {
@@ -100,9 +99,9 @@ function cases() {
         });
 
         // Play all indicator videos
-        indicator_group.selectAll('video').each(function() {
-            this.play().catch(e => console.log("Autoplay prevented:", e));
-        });
+        // indicator_group.selectAll('video').each(function() {
+        //     this.play().catch(e => console.log("Autoplay prevented:", e));
+        // });
     }
 
     image_init();
