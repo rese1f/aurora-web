@@ -107,30 +107,24 @@ function single_curve() {
         .style('cursor', 'pointer')
         .on('click', onRightClick);
     
-    function select_new_image(row, i) {
-        console.log('select_new_image called with:', row, i);
-        if (!row || !row.id) {
-            console.error('Invalid row or row.id');
+    function select_new_image(event, d) {
+        if (!d || !d.id) {
+            console.error(d, d.id, 'Invalid row or row.id');
             return;
         }
         currentIndex = 0;
-        if (base_image_name === row.id) {
+        if (base_image_name === d.id) {
             return;
         }
-        var indicator_images = indicator_group.selectAll('image').data(indicator_data)
-        indicator_images.attr('opacity', function(d) {
-            if (row.id == d.id) {
-                return 1.0;
-            } else {
-                return 0.2
-            }
-        })
+        indicator_group.selectAll('image')
+            .attr('opacity', item => item.id === d.id ? 1.0 : 0.2);
         
-        base_image_name = row.id;
+        base_image_name = d.id;
         base_dir = `assets/img/single_curve/${base_image_name}/`;
-        
+        currentIndex = 0;
+        currentSampleIndex = d.id;
+        updateImage(); 
         var display_image = image_group.select('#display_image_new');
-        currentSampleIndex =  row.id
         
         var interp_file = base_dir + '1.png';
         
@@ -173,7 +167,7 @@ function single_curve() {
             .style('cursor', 'pointer')  // Add this line to show it's clickable
             .on('click', function(event, d) {
                 console.log('Image clicked:', d);
-                select_new_image(event, d);
+                select_new_image(null, d);
             });
 
         console.log('Indicator images initialized:', indicator_images.size());
