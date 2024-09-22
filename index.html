@@ -129,8 +129,8 @@
         <d-contents>
             <nav>
                 <h4>Contents</h4>
-                <div><a href="#auroracap">AuroraCap</a></div>
-                <div><a href="#vdc">VDC</a></div>
+                <div><a href="#model">Model</a></div>
+                <div><a href="#benchmark">Benchmark</a></div>
                 <div><a href="#evaluation">Evaluation</a></div>
                 <div><a href="#ablation">Ablation</a></div>
                 <div><a href="#case">Case Study</a></div>
@@ -145,7 +145,7 @@
             In addition, we propose a new LLM-assisted metric VDCScore for bettering evaluation. 
             We adopt a divide-and-conquer strategy to transform the evaluation of long captions into multiple short question-answering pairs. 
         </p>
-        <section id="auroracap">
+        <section id="model">
             <h2>AuroraCap: A Efficient Video Detailed Captioner</h2>
             <p>
                 <h3 class="text">Architecture</h1>
@@ -157,8 +157,8 @@
                     <strong>Token merging.<d-cite key="bolya2022token"></d-cite></strong> 
                     To increase the throughput of existing ViT models, Token Merging is proposed to gradually combines similar tokens in a transformer to reduce the number of tokens passing through ViT models. 
                     Token Merging has been proven to be effective on image and video classification tasks even without the need for training.
-                    We conduct frame-wise token merging in AuroraCap, where the feature is extracted by CLIP ViT-H model. 
-                    We show token merging visualization examples from  COCO, VG, SA-1B as follows:
+                    We conduct frame-wise token merging in AuroraCap, where the feature is extracted by CLIP ViT-H<d-cite key="fang2023data"></d-cite> model. 
+                    We show token merging visualization examples from  COCO<d-cite key="lin2014microsoft"></d-cite>, VG<d-cite key="krishna2017visual"></d-cite>, SA-1B<d-cite key="kirillov2023segment"></d-cite> as follows:
                     <d-figure>
                         <figure class="l-body">
                             <div id='tomevis_div'></div>
@@ -192,7 +192,7 @@
             </p>
 
         </section>
-        <section id="vdc">
+        <section id="benchmark">
             <h2>VDC: A New Video Detailed Captioning Benchmark</h2>
 
             <div style="display: flex; flex-direction: column; align-items: center;">
@@ -202,114 +202,114 @@
                         <tr>
                             <th class="tb-hdr">Dataset</th>
                             <th>Theme</th>
-                            <th># Video</th>
-                            <th># Clip</th>
-                            <th># Caption</th>
-                            <th># Word</th>
-                            <th># Vocab.</th>
-                            <th>Ave. Length</th>
+                            <th style="text-align: center; vertical-align: middle;"># Video</th>
+                            <th style="text-align: center; vertical-align: middle;"># Clip</th>
+                            <th style="text-align: center; vertical-align: middle;"># Caption</th>
+                            <th style="text-align: center; vertical-align: middle;"># Word</th>
+                            <th style="text-align: center; vertical-align: middle;"># Vocab.</th>
+                            <th style="text-align: center; vertical-align: middle;">Ave. Length</th>
                         </tr>
                         <tr>
-                            <td class="italic">MSVD</td>
-                            <td>Open</td>
-                            <td>1,970</td>
-                            <td>1,970</td>
-                            <td>70,028</td>
-                            <td>607,339</td>
-                            <td>13,010</td>
-                            <td>8.67</td>
+                            <td class="italic">MSVD<d-cite key="chen2011collecting"></d-cite></td>
+                            <td style="text-align: center; vertical-align: middle;">Open</td>
+                            <td style="text-align: center; vertical-align: middle;">1,970</td>
+                            <td style="text-align: center; vertical-align: middle;">1,970</td>
+                            <td style="text-align: center; vertical-align: middle;">70,028</td>
+                            <td style="text-align: center; vertical-align: middle;">607,339</td>
+                            <td style="text-align: center; vertical-align: middle;">13,010</td>
+                            <td style="text-align: center; vertical-align: middle;">8.67</td>
                         </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="italic">MSR-VTT</td>
-                                <td>Open</td>
-                                <td>7,180</td>
-                                <td>10,000</td>
-                                <td>200,000</td>
-                                <td>1,856,523</td>
-                                <td>29,316</td>
-                                <td>9.28</td>
+                                <td class="italic">MSR-VTT<d-cite key="xu2016msr"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Open</td>
+                                <td style="text-align: center; vertical-align: middle;">7,180</td>
+                                <td style="text-align: center; vertical-align: middle;">10,000</td>
+                                <td style="text-align: center; vertical-align: middle;">200,000</td>
+                                <td style="text-align: center; vertical-align: middle;">1,856,523</td>
+                                <td style="text-align: center; vertical-align: middle;">29,316</td>
+                                <td style="text-align: center; vertical-align: middle;">9.28</td>
                             </tr>
                             <tr>
-                                <td class="italic">ActivityNet</td>
-                                <td>Open</td>
-                                <td>20,000</td>
-                                <td>100,000</td>
-                                <td>100,000</td>
-                                <td>1,340,000</td>
-                                <td>15,564</td>
-                                <td>13.40</td>
+                                <td class="italic">ActivityNet<d-cite key="krishna2017dense"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Open</td>
+                                <td style="text-align: center; vertical-align: middle;">20,000</td>
+                                <td style="text-align: center; vertical-align: middle;">100,000</td>
+                                <td style="text-align: center; vertical-align: middle;">100,000</td>
+                                <td style="text-align: center; vertical-align: middle;">1,340,000</td>
+                                <td style="text-align: center; vertical-align: middle;">15,564</td>
+                                <td style="text-align: center; vertical-align: middle;">13.40</td>
                             </tr>
                             <tr>
-                                <td class="italic">S-MiT</td>
-                                <td>Open</td>
-                                <td>515,912</td>
-                                <td>515,912</td>
-                                <td>515,912</td>
-                                <td>5,618,064</td>
-                                <td>50,570</td>
-                                <td>10.89</td>
+                                <td class="italic">S-MiT<d-cite key="monfort2021spoken"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Open</td>
+                                <td style="text-align: center; vertical-align: middle;">515,912</td>
+                                <td style="text-align: center; vertical-align: middle;">515,912</td>
+                                <td style="text-align: center; vertical-align: middle;">515,912</td>
+                                <td style="text-align: center; vertical-align: middle;">5,618,064</td>
+                                <td style="text-align: center; vertical-align: middle;">50,570</td>
+                                <td style="text-align: center; vertical-align: middle;">10.89</td>
                             </tr>
                             <tr>
-                                <td class="italic">M-VAD</td>
-                                <td>Movie</td>
-                                <td>92</td>
-                                <td>48,986</td>
-                                <td>55,905</td>
-                                <td>519,933</td>
-                                <td>18,269</td>
-                                <td>9.30</td>
+                                <td class="italic">M-VAD<d-cite key="torabi2015using"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Movie</td>
+                                <td style="text-align: center; vertical-align: middle;">92</td>
+                                <td style="text-align: center; vertical-align: middle;">48,986</td>
+                                <td style="text-align: center; vertical-align: middle;">55,905</td>
+                                <td style="text-align: center; vertical-align: middle;">519,933</td>
+                                <td style="text-align: center; vertical-align: middle;">18,269</td>
+                                <td style="text-align: center; vertical-align: middle;">9.30</td>
                             </tr>
                             <tr>
-                                <td class="italic">MPII-MD</td>
-                                <td>Movie</td>
-                                <td>94</td>
-                                <td>68,337</td>
-                                <td>68,375</td>
-                                <td>653,467</td>
-                                <td>24,549</td>
-                                <td>9.56</td>
+                                <td class="italic">MPII-MD<d-cite key="rohrbach2013translating"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Movie</td>
+                                <td style="text-align: center; vertical-align: middle;">94</td>
+                                <td style="text-align: center; vertical-align: middle;">68,337</td>
+                                <td style="text-align: center; vertical-align: middle;">68,375</td>
+                                <td style="text-align: center; vertical-align: middle;">653,467</td>
+                                <td style="text-align: center; vertical-align: middle;">24,549</td>
+                                <td style="text-align: center; vertical-align: middle;">9.56</td>
                             </tr>
                             <tr>
-                                <td class="italic">Youcook2</td>
-                                <td>Cooking</td>
-                                <td>2,000</td>
-                                <td>15,400</td>
-                                <td>15,400</td>
-                                <td>121,418</td>
-                                <td>2,583</td>
-                                <td>7.88</td>
+                                <td class="italic">Youcook2<d-cite key="zhou2018towards"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Cooking</td>
+                                <td style="text-align: center; vertical-align: middle;">2,000</td>
+                                <td style="text-align: center; vertical-align: middle;">15,400</td>
+                                <td style="text-align: center; vertical-align: middle;">15,400</td>
+                                <td style="text-align: center; vertical-align: middle;">121,418</td>
+                                <td style="text-align: center; vertical-align: middle;">2,583</td>
+                                <td style="text-align: center; vertical-align: middle;">7.88</td>
                             </tr>
                             <tr>
-                                <td class="italic">Charades</td>
-                                <td>Human</td>
-                                <td>9,848</td>
-                                <td>10,000</td>
-                                <td>27,380</td>
-                                <td>607,339</td>
-                                <td>13,000</td>
-                                <td>22.18</td>
+                                <td class="italic">Charades<d-cite key="sigurdsson2016hollywood"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Human</td>
+                                <td style="text-align: center; vertical-align: middle;">9,848</td>
+                                <td style="text-align: center; vertical-align: middle;">10,000</td>
+                                <td style="text-align: center; vertical-align: middle;">27,380</td>
+                                <td style="text-align: center; vertical-align: middle;">607,339</td>
+                                <td style="text-align: center; vertical-align: middle;">13,000</td>
+                                <td style="text-align: center; vertical-align: middle;">22.18</td>
                             </tr>
                             <tr>
-                                <td class="italic">VATEX</td>
-                                <td>Open</td>
-                                <td>41,300</td>
-                                <td>41,300</td>
-                                <td>413,000</td>
-                                <td>4,994,768</td>
-                                <td>44,103</td>
-                                <td>12.09</td>
+                                <td class="italic">VATEX<d-cite key="wang2019vatex"></d-cite></td>
+                                <td style="text-align: center; vertical-align: middle;">Open</td>
+                                <td style="text-align: center; vertical-align: middle;">41,300</td>
+                                <td style="text-align: center; vertical-align: middle;">41,300</td>
+                                <td style="text-align: center; vertical-align: middle;">413,000</td>
+                                <td style="text-align: center; vertical-align: middle;">4,994,768</td>
+                                <td style="text-align: center; vertical-align: middle;">44,103</td>
+                                <td style="text-align: center; vertical-align: middle;">12.09</td>
                             </tr>
                             <tr>
                                 <td class="italic">VDC (ours)</td>
-                                <td>Open</td>
-                                <td>1,027</td>
-                                <td>1,027</td>
-                                <td>1,027</td>
-                                <td>515,441</td>
-                                <td>20,419</td>
-                                <td class="highlight-red">500.91</td>
+                                <td style="text-align: center; vertical-align: middle;">Open</td>
+                                <td style="text-align: center; vertical-align: middle;">1,027</td>
+                                <td style="text-align: center; vertical-align: middle;">1,027</td>
+                                <td style="text-align: center; vertical-align: middle;">1,027</td>
+                                <td style="text-align: center; vertical-align: middle;">515,441</td>
+                                <td style="text-align: center; vertical-align: middle;">20,419</td>
+                                <td class="highlight-red" style="text-align: center; vertical-align: middle;">500.91</td>
                             </tr>
                         </tbody>
                     </table>
@@ -322,7 +322,7 @@
             <p class="text">
                 <h3 class="text">Benchmark Collection and Processing</h3>
                 <strong>Video collection and processing.</strong>
-                    We building VDC upon Panda-70M, Ego4D, Mixkit, Pixabay, and Pexels. 
+                    We building VDC upon Panda-70M<d-cite key="chen2024panda"></d-cite>, Ego4D<d-cite key="grauman2022ego4d"></d-cite>, Mixkit<d-cite key="mixkit"></d-cite>, Pixabay<d-cite key="pixabay"></d-cite>, and Pexels<d-cite key="pexels"></d-cite>. 
                     We first split the video into clips and apply dense frame extraction, then manually replacing blurry frames with adjacent clear ones.
                     <br>
                 <strong>Structured detailed captions construction pipeline.</strong>
@@ -415,149 +415,167 @@
                                 <thead>
                                 <tr>
                                     <th class="tb-hdr">Model</th>
-                                    <th class="tb-hdr">Camera</th>
-                                    <th class="tb-hdr">Short</th>
-                                    <th class="tb-hdr">Background</th>
-                                    <th class="tb-hdr">Main Object</th>
-                                    <th class="tb-hdr">Detailed</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">Ave.VDC</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">Camera</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">Short</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">BG</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">Object</th>
+                                    <th class="tb-hdr" style="text-align: center; vertical-align: middle;">Detailed</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="italic">Vicuna-v1.5-7B</td>
-                                        <td>21.68</td>
-                                        <td>23.06</td>
-                                        <td>22.02</td>
-                                        <td>22.64</td>
-                                        <td>23.09</td>
+                                        <td class="italic">Vicuna-v1.5-7B<d-cite key="chiang2023vicuna"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">22.50</td>
+                                        <td style="text-align: center; vertical-align: middle;">21.68</td>
+                                        <td style="text-align: center; vertical-align: middle;">23.06</td>
+                                        <td style="text-align: center; vertical-align: middle;">22.02</td>
+                                        <td style="text-align: center; vertical-align: middle;">22.64</td>
+                                        <td style="text-align: center; vertical-align: middle;">23.09</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Llama-3.1-8B</td>
-                                        <td>17.83</td>
-                                        <td>17.90</td>
-                                        <td>19.52</td>
-                                        <td>19.57</td>
-                                        <td>20.10</td>
+                                        <td class="italic">Llama-3.1-8B<d-cite key="dubey2024llama"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">18.98</td>
+                                        <td style="text-align: center; vertical-align: middle;">17.83</td>
+                                        <td style="text-align: center; vertical-align: middle;">17.90</td>
+                                        <td style="text-align: center; vertical-align: middle;">19.52</td>
+                                        <td style="text-align: center; vertical-align: middle;">19.57</td>
+                                        <td style="text-align: center; vertical-align: middle;">20.10</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Gemini-1.5 Pro</td>
-                                        <td>38.68</td>
-                                        <td>35.71</td>
-                                        <td>43.84</td>
-                                        <td>47.32</td>
-                                        <td>43.11</td>
+                                        <td class="italic">Gemini-1.5 Pro<d-cite key="reid2024gemini"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">41.73</td>
+                                        <td style="text-align: center; vertical-align: middle;">38.68</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.71</td>
+                                        <td style="text-align: center; vertical-align: middle;">43.84</td>
+                                        <td style="text-align: center; vertical-align: middle;">47.32</td>
+                                        <td style="text-align: center; vertical-align: middle;">43.11</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAMA-VID</td>
-                                        <td>39.47</td>
-                                        <td>29.92</td>
-                                        <td>28.01</td>
-                                        <td>31.24</td>
-                                        <td>25.67</td>
+                                        <td class="italic">LLAMA-VID<d-cite key="li2023llama"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">30.86</td>
+                                        <td style="text-align: center; vertical-align: middle;">39.47</td>
+                                        <td style="text-align: center; vertical-align: middle;">29.92</td>
+                                        <td style="text-align: center; vertical-align: middle;">28.01</td>
+                                        <td style="text-align: center; vertical-align: middle;">31.24</td>
+                                        <td style="text-align: center; vertical-align: middle;">25.67</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Video-ChatGPT-7B</td>
-                                        <td>37.46</td>
-                                        <td>29.36</td>
-                                        <td>33.68</td>
-                                        <td>30.47</td>
-                                        <td>24.61</td>
+                                        <td class="italic">Video-ChatGPT-7B<d-cite key="maaz2023video"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">31.12</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.46</td>
+                                        <td style="text-align: center; vertical-align: middle;">29.36</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.68</td>
+                                        <td style="text-align: center; vertical-align: middle;">30.47</td>
+                                        <td style="text-align: center; vertical-align: middle;">24.61</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">VILA-7B</td>
-                                        <td>34.33</td>
-                                        <td>30.40</td>
-                                        <td>35.15</td>
-                                        <td>33.38</td>
-                                        <td>29.78</td>
+                                        <td class="italic">VILA-7B<d-cite key="lin2023vila"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">32.61</td>
+                                        <td style="text-align: center; vertical-align: middle;">34.33</td>
+                                        <td style="text-align: center; vertical-align: middle;">30.40</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.15</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.38</td>
+                                        <td style="text-align: center; vertical-align: middle;">29.78</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Video-LLAVA-7B</td>
-                                        <td>37.48</td>
-                                        <td>30.67</td>
-                                        <td>32.50</td>
-                                        <td>36.01</td>
-                                        <td>27.36</td>
+                                        <td class="italic">Video-LLAVA-7B<d-cite key="lin2023video"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">32.80</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.48</td>
+                                        <td style="text-align: center; vertical-align: middle;">30.67</td>
+                                        <td style="text-align: center; vertical-align: middle;">32.50</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.01</td>
+                                        <td style="text-align: center; vertical-align: middle;">27.36</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-1.5-7B</td>
-                                        <td>38.38</td>
-                                        <td>28.61</td>
-                                        <td>34.86</td>
-                                        <td>34.62</td>
-                                        <td>33.43</td>
+                                        <td class="italic">LLAVA-1.5-7B<d-cite key="liu2023improved"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">33.98</td>
+                                        <td style="text-align: center; vertical-align: middle;">38.38</td>
+                                        <td style="text-align: center; vertical-align: middle;">28.61</td>
+                                        <td style="text-align: center; vertical-align: middle;">34.86</td>
+                                        <td style="text-align: center; vertical-align: middle;">34.62</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.43</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LongVA-7B</td>
-                                        <td>35.32</td>
-                                        <td>31.94</td>
-                                        <td>36.39</td>
-                                        <td>40.95</td>
-                                        <td>27.91</td>
+                                        <td class="italic">LongVA-7B<d-cite key="zhang2024longva"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">34.50</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.32</td>
+                                        <td style="text-align: center; vertical-align: middle;">31.94</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.39</td>
+                                        <td style="text-align: center; vertical-align: middle;">40.95</td>
+                                        <td style="text-align: center; vertical-align: middle;">27.91</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-1.5-13B</td>
-                                        <td>38.97</td>
-                                        <td>30.89</td>
-                                        <td>34.79</td>
-                                        <td>36.27</td>
-                                        <td>33.00</td>
+                                        <td class="italic">LLAVA-1.5-13B<d-cite key="liu2023improved"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">34.78</td>
+                                        <td style="text-align: center; vertical-align: middle;">38.97</td>
+                                        <td style="text-align: center; vertical-align: middle;">30.89</td>
+                                        <td style="text-align: center; vertical-align: middle;">34.79</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.27</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.00</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-NeXT-V7B</td>
-                                        <td>39.73</td>
-                                        <td>30.63</td>
-                                        <td>36.54</td>
-                                        <td>36.54</td>
-                                        <td>33.84</td>
+                                        <td class="italic">LLAVA-NeXT-V7B<d-cite key="zhang2024llavanextvideo"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">35.46</td>
+                                        <td style="text-align: center; vertical-align: middle;">39.73</td>
+                                        <td style="text-align: center; vertical-align: middle;">30.63</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.54</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.54</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.84</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-1.6-7B</td>
-                                        <td>36.50</td>
-                                        <td>31.91</td>
-                                        <td>37.58</td>
-                                        <td>36.03</td>
-                                        <td>36.47</td>
+                                        <td class="italic">LLAVA-1.6-7B<d-cite key="liu2024llavanext"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">35.70</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.50</td>
+                                        <td style="text-align: center; vertical-align: middle;">31.91</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.58</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.03</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.47</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-1.6-13B</td>
-                                        <td>35.61</td>
-                                        <td>31.90</td>
-                                        <td class="highlight-red">38.90</td>
-                                        <td>36.65</td>
-                                        <td>36.18</td>
+                                        <td class="italic">LLAVA-1.6-13B<d-cite key="liu2024llavanext"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">35.85</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.61</td>
+                                        <td style="text-align: center; vertical-align: middle;">31.90</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">38.90</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.65</td>
+                                        <td style="text-align: center; vertical-align: middle;">36.18</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">ShareGPT4Video-8B</td>
-                                        <td>33.28</td>
-                                        <td class="highlight-red">39.05</td>
-                                        <td>35.77</td>
-                                        <td>37.12</td>
-                                        <td>35.62</td>
+                                        <td class="italic">ShareGPT4Video-8B<d-cite key="chen2024sharegpt4video"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">36.17</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.28</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">39.05</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.77</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.12</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.62</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLAVA-OV-7B</td>
-                                        <td>37.82</td>
-                                        <td>32.58</td>
-                                        <td>37.43</td>
-                                        <td>38.21</td>
-                                        <td>41.20</td>
+                                        <td class="italic">LLAVA-OV-7B<d-cite key="li2024llava"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">37.45</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.82</td>
+                                        <td style="text-align: center; vertical-align: middle;">32.58</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.43</td>
+                                        <td style="text-align: center; vertical-align: middle;">38.21</td>
+                                        <td style="text-align: center; vertical-align: middle;">41.20</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">InternVL-2-8B</td>
-                                        <td>39.08</td>
-                                        <td>33.02</td>
-                                        <td>37.47</td>
-                                        <td class="highlight-red">44.16</td>
-                                        <td>34.89</td>
+                                        <td class="italic">InternVL-2-8B<d-cite key="chen2023internvl"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">37.72</td>
+                                        <td style="text-align: center; vertical-align: middle;">39.08</td>
+                                        <td style="text-align: center; vertical-align: middle;">33.02</td>
+                                        <td style="text-align: center; vertical-align: middle;">37.47</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">44.16</td>
+                                        <td style="text-align: center; vertical-align: middle;">34.89</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>AuroraCap-7B</strong></td>
-                                        <td class="highlight-red">43.50</td>
-                                        <td>32.07</td>
-                                        <td>35.92</td>
-                                        <td>39.02</td>
-                                        <td class="highlight-red">41.30</td>
+                                        <td class="italic"><strong>AuroraCap-7B</strong></td>
+                                        <td style="text-align: center; vertical-align: middle;">38.21</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">43.50</td>
+                                        <td style="text-align: center; vertical-align: middle;">32.07</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.92</td>
+                                        <td style="text-align: center; vertical-align: middle;">39.02</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">41.30</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -568,7 +586,7 @@
                     </div>
                     <br>
                     <strong>Image captioning.</strong> 
-                    We evaluate AuroraCap using CIDEr, BELU-4, BELU-1, METEOR, and ROUGE-L metric on Flickr, NoCaps, and COCO-Cap benchmarks and compare it with LLM-based state-of-the-art methods. 
+                    We evaluate AuroraCap using CIDEr, BELU-4, BELU-1, METEOR, and ROUGE-L metric on Flickr<d-cite key="plummer2015flickr30k"></d-cite>, NoCaps<d-cite key="agrawal2019nocaps"></d-cite>, and COCO-Cap<d-cite key="lin2014microsoft"></d-cite> benchmarks and compare it with LLM-based state-of-the-art methods. 
                     AuroraCap shows good performance under zero-shot settings. 
                     Notice that these benchmarks all contain short captions consisting of a single sentence, so they only partially reflect the model's performance.
                     <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
@@ -577,118 +595,118 @@
                                 <thead>
                                 <tr>
                                     <th class="tb-hdr" rowspan="2">Model</th>
-                                    <th colspan="2" class="tb-hdr">Flickr (31,784)</th>
-                                    <th colspan="2" class="tb-hdr">NoCaps (4,500)</th>
-                                    <th colspan="2" class="tb-hdr">COCO-Cap (5,000)</th>
+                                    <th colspan="2" class="tb-hdr">Flickr<d-cite key="plummer2015flickr30k"></d-cite> (31,784)</th>
+                                    <th colspan="2" class="tb-hdr">NoCaps<d-cite key="agrawal2019nocaps"></d-cite> (4,500)</th>
+                                    <th colspan="2" class="tb-hdr">COCO-Cap<d-cite key="lin2014microsoft"></d-cite> (5,000)</th>
                                 </tr>
                                 <tr>
-                                    <th>C</th>
-                                    <th>R</th>
-                                    <th>C</th>
-                                    <th>R</th>
-                                    <th>C</th>
-                                    <th>R</th>
+                                    <th style="text-align: center; vertical-align: middle;">C</th>
+                                    <th style="text-align: center; vertical-align: middle;">R</th>
+                                    <th style="text-align: center; vertical-align: middle;">C</th>
+                                    <th style="text-align: center; vertical-align: middle;">R</th>
+                                    <th style="text-align: center; vertical-align: middle;">C</th>
+                                    <th style="text-align: center; vertical-align: middle;">R</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="italic">LLaVA-1.5-7B</td>
-                                        <td>74.9</td>
-                                        <td>52.8</td>
-                                        <td>105.5</td>
-                                        <td>59.4</td>
-                                        <td>110.3</td>
-                                        <td>55.5</td>
+                                        <td class="italic">LLaVA-1.5-7B<d-cite key="liu2023improved"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">74.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">52.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">105.5</td>
+                                        <td style="text-align: center; vertical-align: middle;">59.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">110.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">55.5</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLaVA-1.5-13B</td>
-                                        <td>79.4</td>
-                                        <td>53.9</td>
-                                        <td>109.2</td>
-                                        <td>60.3</td>
-                                        <td>115.6</td>
-                                        <td>56.5</td>
+                                        <td class="italic">LLaVA-1.5-13B<d-cite key="liu2023improved"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">79.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">53.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">109.2</td>
+                                        <td style="text-align: center; vertical-align: middle;">60.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">115.6</td>
+                                        <td style="text-align: center; vertical-align: middle;">56.5</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLaVA-1.6-7B</td>
-                                        <td>68.4</td>
-                                        <td>50.3</td>
-                                        <td>88.4</td>
-                                        <td>54.6</td>
-                                        <td>99.9</td>
-                                        <td>52.4</td>
+                                        <td class="italic">LLaVA-1.6-7B<d-cite key="liu2024llavanext"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">68.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">50.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">88.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">54.6</td>
+                                        <td style="text-align: center; vertical-align: middle;">99.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">52.4</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">LLaVA-1.6-13B</td>
-                                        <td>66.6</td>
-                                        <td>48.8</td>
-                                        <td>88.1</td>
-                                        <td>54.9</td>
-                                        <td>101.8</td>
-                                        <td>52.1</td>
+                                        <td class="italic">LLaVA-1.6-13B<d-cite key="liu2024llavanext"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">66.6</td>
+                                        <td style="text-align: center; vertical-align: middle;">48.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">88.1</td>
+                                        <td style="text-align: center; vertical-align: middle;">54.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">101.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">52.1</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">MiniCPM-V-3B</td>
-                                        <td>66.8</td>
-                                        <td>51.0</td>
-                                        <td>89.9</td>
-                                        <td>55.8</td>
-                                        <td>94.2</td>
-                                        <td>52.3</td>
+                                        <td class="italic">MiniCPM-V-3B<d-cite key="viscpm"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">66.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">51.0</td>
+                                        <td style="text-align: center; vertical-align: middle;">89.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">55.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">94.2</td>
+                                        <td style="text-align: center; vertical-align: middle;">52.3</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">DeCap</td>
-                                        <td>56.7</td>
-                                        <td>—</td>
-                                        <td>42.7</td>
-                                        <td>—</td>
-                                        <td>91.2</td>
-                                        <td>—</td>
+                                        <td class="italic">DeCap<d-cite key="li2023decap"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">56.7</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">42.7</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">91.2</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Flamingo-80B</td>
-                                        <td>67.2</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>84.3</td>
-                                        <td>—</td>
+                                        <td class="italic">Flamingo-80B<d-cite key="alayrac2022flamingo"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">67.2</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">84.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Chameleon-34B</td>
-                                        <td>74.7<sup>2</sup></td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>120.2<sup>2</sup></td>
-                                        <td>—</td>
+                                        <td class="italic">Chameleon-34B<d-cite key="team2024chameleon"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">74.7<sup>2</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">120.2<sup>2</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
                                         <td class="italic">GPT-4V</td>
-                                        <td>55.3<sup>8</sup></td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>78.5<sup>8</sup></td>
-                                        <td>—</td>
+                                        <td style="text-align: center; vertical-align: middle;">55.3<sup>8</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">78.5<sup>8</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td class="italic">Gemini-1.5 Pro</td>
-                                        <td>82.2<sup>4</sup></td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>99.8<sup>2</sup></td>
-                                        <td>—</td>
+                                        <td class="italic">Gemini-1.5 Pro<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">82.2<sup>4</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">99.8<sup>2</sup></td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
                                         <td><strong>AuroraCap-7B</strong></td>
-                                        <td class="highlight-red">88.9</td>
-                                        <td class="highlight-red">55.4</td>
-                                        <td class="highlight-red">111.4</td>
-                                        <td class="highlight-red">60.6</td>
-                                        <td class="highlight-red">120.8</td>
-                                        <td class="highlight-red">57.2</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">88.9</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">55.4</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">111.4</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">60.6</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">120.8</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">57.2</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -702,120 +720,120 @@
                 <p class="text">
                     <strong>Video captioning.</strong> 
                     Although the current video captioning benchmarks are only contains one-sentence captions, to compare with prior work, we similarly evaluate on these benchmarks. 
-                    We evaluate AuroraCap on MSR-VTT, VATEX, and ActivityNet Captions and compare it with other methods.
+                    We evaluate AuroraCap on MSR-VTT<d-cite key="xu2016msr"></d-cite> and VATEX<d-cite key="wang2019vatex"></d-cite> and compare it with other methods.
                     <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="table-container">
                             <table class="data-table">
                                 <thead>
                                 <tr>
                                     <th class="tb-hdr" rowspan="2">Model</th>
-                                    <th colspan="5" class="tb-hdr">MSR-VTT (1,000)</th>
-                                    <th colspan="5" class="tb-hdr">VATEX (1,000)</th>
+                                    <th colspan="5" class="tb-hdr">MSR-VTT<d-cite key="bolya2022token"></d-cite> (1,000)</th>
+                                    <th colspan="5" class="tb-hdr">VATEX<d-cite key="bolya2022token"></d-cite> (1,000)</th>
                                 </tr>
                                 <tr>
-                                    <th>C</th>
-                                    <th>B@1</th>
-                                    <th>B@4</th>
-                                    <th>M</th>
-                                    <th>R</th>
-                                    <th>C</th>
-                                    <th>B@1</th>
-                                    <th>B@4</th>
-                                    <th>M</th>
-                                    <th>R</th>
+                                    <th style="text-align: center; vertical-align: middle;">C</th>
+                                    <th style="text-align: center; vertical-align: middle;">B@1</th>
+                                    <th style="text-align: center; vertical-align: middle;">B@4</th>
+                                    <th style="text-align: center; vertical-align: middle;">M</th>
+                                    <th style="text-align: center; vertical-align: middle;">R</th>
+                                    <th style="text-align: center; vertical-align: middle;">C</th>
+                                    <th style="text-align: center; vertical-align: middle;">B@1</th>
+                                    <th style="text-align: center; vertical-align: middle;">B@4</th>
+                                    <th style="text-align: center; vertical-align: middle;">M</th>
+                                    <th style="text-align: center; vertical-align: middle;">R</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>ZeroCap</td>
-                                        <td>9.6</td>
-                                        <td>—</td>
-                                        <td>2.9</td>
-                                        <td>16.3</td>
-                                        <td>35.4</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
+                                        <td>ZeroCap<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">9.6</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">2.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">16.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">35.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td>DeCap</td>
-                                        <td>18.6</td>
-                                        <td>—</td>
-                                        <td>14.7</td>
-                                        <td>20.4</td>
-                                        <td>—</td>
-                                        <td>18.7</td>
-                                        <td>—</td>
-                                        <td>13.1</td>
-                                        <td>15.3</td>
-                                        <td>—</td>
+                                        <td>DeCap<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">18.6</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">14.7</td>
+                                        <td style="text-align: center; vertical-align: middle;">20.4</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">18.7</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">13.1</td>
+                                        <td style="text-align: center; vertical-align: middle;">15.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td>PaLI-3</td>
-                                        <td>21.3</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
+                                        <td>PaLI-3<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">21.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td>Ma et al.</td>
-                                        <td>22.1</td>
-                                        <td>—</td>
-                                        <td>3.5</td>
-                                        <td>17.3</td>
-                                        <td>28.7</td>
-                                        <td>23.9</td>
-                                        <td>—</td>
-                                        <td>2.8</td>
-                                        <td>14.1</td>
-                                        <td>23.5</td>
+                                        <td>Ma et al.<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">22.1</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">3.5</td>
+                                        <td style="text-align: center; vertical-align: middle;">17.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">28.7</td>
+                                        <td style="text-align: center; vertical-align: middle;">23.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">2.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">14.1</td>
+                                        <td style="text-align: center; vertical-align: middle;">23.5</td>
                                     </tr>
                                     <tr>
-                                        <td>LLaVA-7B</td>
-                                        <td>16.9</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
-                                        <td>—</td>
+                                        <td>LLaVA-7B<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">16.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
                                     </tr>
                                     <tr>
-                                        <td>Video-LLAMA</td>
-                                        <td>2.3</td>
-                                        <td>—</td>
-                                        <td>4.9</td>
-                                        <td>16.8</td>
-                                        <td>—</td>
-                                        <td>3.8</td>
-                                        <td>—</td>
-                                        <td>4.3</td>
-                                        <td>16.3</td>
-                                        <td>21.8</td>
+                                        <td>Video-LLAMA<d-cite key="bolya2022token"></d-cite></td>
+                                        <td style="text-align: center; vertical-align: middle;">2.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">4.9</td>
+                                        <td style="text-align: center; vertical-align: middle;">16.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">3.8</td>
+                                        <td style="text-align: center; vertical-align: middle;">—</td>
+                                        <td style="text-align: center; vertical-align: middle;">4.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">16.3</td>
+                                        <td style="text-align: center; vertical-align: middle;">21.8</td>
                                     </tr>
                                     <tr>
                                         <td>AuroraCap-7B</td>
-                                        <td class="highlight-red">33.1</td>
-                                        <td class="highlight-red">58.6</td>
-                                        <td class="highlight-red">21.0</td>
-                                        <td class="highlight-red">23.9</td>
-                                        <td class="highlight-red">49.5</td>
-                                        <td class="highlight-red">33.8</td>
-                                        <td class="highlight-red">57.1</td>
-                                        <td class="highlight-red">18.4</td>
-                                        <td class="highlight-red">19.0</td>
-                                        <td class="highlight-red">40.8</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">33.1</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">58.6</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">21.0</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">23.9</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">49.5</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">33.8</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">57.1</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">18.4</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">19.0</td>
+                                        <td class="highlight-red" style="text-align: center; vertical-align: middle;">40.8</td>
                                     </tr>
 
                                 </tbody>
@@ -833,7 +851,7 @@
 
 
         <section id="ablation">
-            <h2>Ablation Study on Token Merging Ratio</h2>
+            <h2>Ablation Study</h2>
                     As a core training and inference strategy of AuroraCap, token merging plays a significant role in reducing the number of visual tokens. 
                     We further study how the video detailed captioning capability is influenced by token merge ratio. 
                     We define the performance percentage as the proportion between the highest and lowest values on the entire performance curve. 
