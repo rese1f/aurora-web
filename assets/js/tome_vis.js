@@ -32,13 +32,13 @@ function tome_vis() {
         .attr('id', 'indicator_group');
 
     function updateContainerHeight(height) {
-        var total_height = height + margin.top + margin.bottom + indicator_image_size + 20;
+        var total_height = height + margin.top + margin.bottom + 80;
         container
             .attr('height', total_height)
             .attr('viewBox', `0 0 ${static_width} ${total_height}`);
         
         indicator_group
-            .attr('transform', `translate(${margin.left}, ${height + margin.top + 20})`);
+            .attr('transform', `translate(${margin.left}, ${height - 30})`);
     }
 
     function image_init() {
