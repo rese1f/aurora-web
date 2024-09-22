@@ -26,6 +26,17 @@
             .highlight-red {
                 background-color: #b83a4b36;
             }
+            .justify-text {
+                text-align: justify;
+                text-justify: inter-word;
+            }
+
+            .justified-text p::after,
+            .justified-text .text::after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
         </style>
     </head>
     <body>
@@ -34,7 +45,7 @@
                 <div class="header-content">
                     <h1 style="margin-top: 0px">AuroraCap</h1>
                     <h2>Less is More for Efficient Video Detailed Captioning and a New Benchmark</h2>
-                        <p>
+                        <p class="justify-text">
                             AuroraCap is a multimodal LLM designed for image and video detailed captioning. We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
                         </p>
                     
@@ -137,7 +148,7 @@
             </nav>
         </d-contents>
         
-        <p>
+        <p class="justify-text">
             We propose AuroraCap, a simple video captioner based on multimodal large language model. 
             We follow the simplest architecture design without additional parameters for temporal modeling. 
             To address the overhead caused by lengthy video sequences, we implement the token merging strategy, reducing the number of visual tokens input. 
@@ -147,13 +158,13 @@
         </p>
         <section id="model">
             <h2>AuroraCap: A Efficient Video Detailed Captioner</h2>
-            <p>
+            <p class="justify-text">
                 <h3 class="text">Architecture</h1>
-                <p>
+                    <p class="justify-text">
                     <strong>LLaVA.<d-cite key="liu2024visual"></d-cite></strong> 
                     To effectively leverage the capabilities of both the pre-trained LLM and visual model, LLaVA adapt a simple multilayer perceptron (MLP) projection layer to connect each patch tokens of image features into the word embedding space. 
                 </p>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Token merging.<d-cite key="bolya2022token"></d-cite></strong> 
                     To increase the throughput of existing ViT models, Token Merging is proposed to gradually combines similar tokens in a transformer to reduce the number of tokens passing through ViT models. 
                     Token Merging has been proven to be effective on image and video classification tasks even without the need for training.
@@ -171,21 +182,21 @@
                     </d-figure>
                 </p>
             </p>
-            <p>
+            <p class="justify-text">
                 <h3 class="text">Training Recipe</h3>
-                <p class="text">
+                <p class="justify-text">
                     We use over 20 million high-quality image/video-text pairs to train AuroraCap in three stages. The training datasets are released at <a href="https://huggingface.co/datasets/Reself/AuroraCap-trainset" target="_blank">HuggingFace</a>.
                 </p>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Pretraining stage.</strong> 
                     We first align visual features with the word embedding space of LLMs. 
                     To achieve this, we freeze the pretrained ViT and LLM, training solely the vision-language connector. 
                 </p>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Vision stage.</strong> 
                     We unfreeze the pretrained ViT while freezing the LLM during vision stage and train with the public data among various computer vision tasks to get better generalization.
                 </p>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Language stage.</strong> 
                     Finally, we conduct end-to-end training, which means all the components are trainable, with the most high-quality public data during language stage. 
                 </p>
@@ -319,18 +330,22 @@
                 </figcaption>
             </div>
 
-            <p class="text">
+            <p class="justify-text">
                 <h3 class="text">Benchmark Collection and Processing</h3>
-                <strong>Video collection and processing.</strong>
+                <p class="justify-text">
+                    <strong>Video collection and processing.</strong>
                     We building VDC upon Panda-70M<d-cite key="chen2024panda"></d-cite>, Ego4D<d-cite key="grauman2022ego4d"></d-cite>, Mixkit<d-cite key="mixkit"></d-cite>, Pixabay<d-cite key="pixabay"></d-cite>, and Pexels<d-cite key="pexels"></d-cite>. 
                     We first split the video into clips and apply dense frame extraction, then manually replacing blurry frames with adjacent clear ones.
                     <br>
+                </p>
+                <p class="justify-text">
                 <strong>Structured detailed captions construction pipeline.</strong>
                     We develop a structured detailed captions construction pipeline to generate extra detailed descriptions from various perspectives, significantly extending the length and enhancing the richness compared to previous benchmarks. 
                     The structured detailed captions includes the following categories:
                     <br>
+                </p>
                     <br>
-                    <ol class="text" style="margin-left: 20px;">
+                    <ol class="justify-text" style="margin-left: 20px;">
                         <li style="margin-bottom: 3px;"><strong>Camera caption.</strong>
                             Describe the camera work in detail, including shot types, angles, movements, transitions, and any special effects used to enhance the video.
                         </li>
@@ -348,10 +363,11 @@
                         </li>
                     </ol>
                     <br>
-                    To generate detailed, fine-grained, and accurate captions, we leverage GPT-4o to produce video descriptions. 
-                    We design a hierarchical prompt strategy to efficiently obtain accurate structured captions and detailed captions in two conversation rounds: (1) Structured Captions Generation and (2) Detailed Captions Integration. 
-                    <br>
-                 
+                <p class="justify-text">
+                To generate detailed, fine-grained, and accurate captions, we leverage GPT-4o to produce video descriptions. 
+                We design a hierarchical prompt strategy to efficiently obtain accurate structured captions and detailed captions in two conversation rounds: (1) Structured Captions Generation and (2) Detailed Captions Integration. 
+                </p>
+                <br>
                 <d-figure id="fig-vision_connector">
                     <figure>
                         <img data-zoomable="" draggable="false" src="assets/img/vdc.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
@@ -361,13 +377,20 @@
                     </figure>
                 </d-figure>
 
+
+                
+
+
             </p>
-            <p class="text">
+            <p class="justify-text">
                 <h3 class="text">Evaluation Metric Design and Leaderboard</h1>
                 <strong>VDCScore: Evaluating Detailed Captions with LLMs</strong>
+                <p class="justify-text">
                     <br>
                     We introduce VDCScore, a novel quantitative metric that utilizes LLMs to evaluate the similarity between predicted and ground-truth detailed captions through a divide-and-conquer approach.
                     The core idea of VDCScore is to decompose long detailed captions into multiple short question-answering pairs, avergae the evaluation of each pair as the final result.
+                </p> 
+                <br>
                     <d-figure id="fig-vision_connector">
                         <figure>
                             <img data-zoomable="" draggable="false" src="assets/img/vdcscore.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
@@ -378,9 +401,9 @@
                     </d-figure>
             </p>
 
-            <p class="text"> 
+            <p class="justify-text"> 
                 <h3 class="text">Benchmark Examples</h3>
-                <p class="text">
+                <p class="justify-text">
                     We present several data examples from VDC dataset in following Figure.
                 </p>
                 
@@ -393,9 +416,9 @@
 
         
         <section id="evaluation">
-            <p>
+            <p class="justify-text">
                 <h2 class="text">Evaluation</h1>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Benchmarking video detailed captioning.</strong>
                     AuroraCap achieves superior performance in video detailed captioning while utilizing significantly fewer visual tokens than other models, fully highlighting the efficiency of AuroraCap. 
                     <d-figure id="fig-vision_connector">
@@ -601,9 +624,11 @@
                     </div>
                     <br>
                     <strong>Image captioning.</strong> 
-                    We evaluate AuroraCap using CIDEr, BELU-4, BELU-1, METEOR, and ROUGE-L metric on Flickr<d-cite key="plummer2015flickr30k"></d-cite>, NoCaps<d-cite key="agrawal2019nocaps"></d-cite>, and COCO-Cap<d-cite key="lin2014microsoft"></d-cite> benchmarks and compare it with LLM-based state-of-the-art methods. 
-                    AuroraCap shows good performance under zero-shot settings. 
-                    Notice that these benchmarks all contain short captions consisting of a single sentence, so they only partially reflect the model's performance.
+                    <p class="justify-text">
+                        We evaluate AuroraCap using CIDEr, BELU-4, BELU-1, METEOR, and ROUGE-L metric on Flickr<d-cite key="plummer2015flickr30k"></d-cite>, NoCaps<d-cite key="agrawal2019nocaps"></d-cite>, and COCO-Cap<d-cite key="lin2014microsoft"></d-cite> benchmarks and compare it with LLM-based state-of-the-art methods. 
+                        AuroraCap shows good performance under zero-shot settings. 
+                        Notice that these benchmarks all contain short captions consisting of a single sentence, so they only partially reflect the model's performance.
+                    </p>
                     <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="table-container">
                             <table class="data-table">
@@ -732,10 +757,12 @@
                     </div>
                 </p>
                 <br>
-                <p class="text">
+                <p class="justify-text">
                     <strong>Video captioning.</strong> 
-                    Although the current video captioning benchmarks are only contains one-sentence captions, to compare with prior work, we similarly evaluate on these benchmarks. 
-                    We evaluate AuroraCap on MSR-VTT<d-cite key="xu2016msr"></d-cite> and VATEX<d-cite key="wang2019vatex"></d-cite> and compare it with other methods.
+                    <p class="justify-text">
+                        Although the current video captioning benchmarks are only contains one-sentence captions, to compare with prior work, we similarly evaluate on these benchmarks. 
+                        We evaluate AuroraCap on MSR-VTT<d-cite key="xu2016msr"></d-cite> and VATEX<d-cite key="wang2019vatex"></d-cite> and compare it with other methods.
+                    </p>
                     <div id="tab:model_ensemble" style="display: flex; flex-direction: column; align-items: center;">
                         <div class="table-container">
                             <table class="data-table">
@@ -867,43 +894,48 @@
 
         <section id="ablation">
             <h2>Ablation Study</h2>
-                    As a core training and inference strategy of AuroraCap, token merging plays a significant role in reducing the number of visual tokens. 
-                    We further study how the video detailed captioning capability is influenced by token merge ratio. 
-                    We define the performance percentage as the proportion between the highest and lowest values on the entire performance curve. 
-                    We highlight the token merging ratio when achieving 90% and 80% performance with the dash line and filled area. 
-                    We found that token merging significantly reduces the number of tokens while maintaining minimal performance drop, and even showing improvement in some tasks. 
-                    <d-figure>
-                        <figure class="l-body">
-                            <div id='tome_div'></div>
-                            <script src="https://d3js.org/d3.v7.min.js"></script>
-                            <script src="assets/js/tome_curve.js"></script>
-                            <figcaption>
-                                Ablation study on token merging ratio on various image and video understanding tasks.
-                            </figcaption>
-                        </figure>
-                    </d-figure>
-
+                <p class="justify-text">
+                As a core training and inference strategy of AuroraCap, token merging plays a significant role in reducing the number of visual tokens. 
+                We further study how the video detailed captioning capability is influenced by token merge ratio. 
+                We define the performance percentage as the proportion between the highest and lowest values on the entire performance curve. 
+                We highlight the token merging ratio when achieving 90% and 80% performance with the dash line and filled area. 
+                We found that token merging significantly reduces the number of tokens while maintaining minimal performance drop, and even showing improvement in some tasks. 
+                </p>
+                <d-figure>
+                    <figure class="l-body">
+                        <div id='tome_div'></div>
+                        <script src="https://d3js.org/d3.v7.min.js"></script>
+                        <script src="assets/js/tome_curve.js"></script>
+                        <figcaption>
+                            Ablation study on token merging ratio on various image and video understanding tasks.
+                        </figcaption>
+                    </figure>
+                </d-figure>
+                <p class="justify-text">
                     To assess the inference speed, we utilize the inference time per video question-answering pair in seconds (TPV) as an evaluative metric. 
                     Figure below indicates the minimum TPV achievable in our settings including with or without token merging and SGLang across seven video understanding datasets. 
                     Reducing the visual tokens and using SGLang result in excellent inference times per video question-answering pair while all the datasets with short video and question inputs. 
-                    <d-figure id="fig-vision_connector">
-                        <figure>
-                            <img data-zoomable="" draggable="false" src="assets/img/sglang.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
-                            <figcaption>
-                                Comparison between different inference settings: 
-                                <b>A</b>: R<sub>vtk</sub> = 1.0</span>, without SGLang, 
-                                <b>B</b>: R<sub>vtk</sub> = 0.1</span>, without SGLang, 
-                                <b>C</b>: R<sub>vtk</sub> = 1.0</span>, with SGLang, 
-                                <b>D</b>: R<sub>vtk</sub> = 0.1</span>, with SGLang. 
-                                The number indicates the maximum inference time in seconds for each benchmark.
-                            </figcaption>
-                        </figure>
-                    </d-figure>
+                </p>
+
+                <d-figure id="fig-vision_connector">
+                    <figure>
+                        <img data-zoomable="" draggable="false" src="assets/img/sglang.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
+                        <figcaption>
+                            Comparison between different inference settings: 
+                            <b>A</b>: R<sub>vtk</sub> = 1.0</span>, without SGLang, 
+                            <b>B</b>: R<sub>vtk</sub> = 0.1</span>, without SGLang, 
+                            <b>C</b>: R<sub>vtk</sub> = 1.0</span>, with SGLang, 
+                            <b>D</b>: R<sub>vtk</sub> = 0.1</span>, with SGLang. 
+                            The number indicates the maximum inference time in seconds for each benchmark.
+                        </figcaption>
+                    </figure>
+                </d-figure>
+
         </section>
 
         <section id="case">
             <h2>Case Study</h2>
-            <p class="text">
+            <p class="justify-text">
                 We perform an extensive case study of AuroraCap on a variety of videos for video detailed captioning. 
                 As shown as followings, AuroraCap is capable of providing excellent detailed captions regarding the camera motion, background and main object with less hallucination. 
             </p>
