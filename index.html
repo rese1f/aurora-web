@@ -403,10 +403,11 @@
 
             <p class="justify-text"> 
                 <h3 class="text">Benchmark Examples</h3>
-                <p class="justify-text">
-                    We present several data examples from VDC dataset in following Figure.
-                </p>
-                
+                <div id="vdc_div">
+                    <div id="vdcvideo_overlay">
+                        <script src="assets/js/vdc_case.js"></script>
+                    </div>
+                </div>
             </p>
 
 
@@ -901,7 +902,7 @@
                 We highlight the token merging ratio when achieving 90% and 80% performance with the dash line and filled area. 
                 We found that token merging significantly reduces the number of tokens while maintaining minimal performance drop, and even showing improvement in some tasks. 
                 </p>
-                <d-figure>
+                <!-- <d-figure>
                     <figure class="l-body">
                         <div id='tome_div'></div>
                         <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -910,7 +911,13 @@
                             Ablation study on token merging ratio on various image and video understanding tasks.
                         </figcaption>
                     </figure>
-                </d-figure>
+                </d-figure> -->
+
+                <div id="singlecurve_div">
+                    <div id="single_curve">
+                        <script src="assets/js/single_curve.js"></script>
+                    </div>
+                </div>
                 <p class="justify-text">
                     To assess the inference speed, we utilize the inference time per video question-answering pair in seconds (TPV) as an evaluative metric. 
                     Figure below indicates the minimum TPV achievable in our settings including with or without token merging and SGLang across seven video understanding datasets. 
@@ -944,8 +951,7 @@
                 <div id="video_overlay">
                     <script src="assets/js/cases.js"></script>
                 </div>
-            </div>
-            
+            </div>            
         </section>
 
         
