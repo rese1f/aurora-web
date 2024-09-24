@@ -54,9 +54,9 @@
                 <div class="header-content">
                     <h1 style="margin-top: 0px">AuroraCap</h1>
                     <h2>Efficient, Performant Video Detailed Captioning and a New Benchmark</h2>
-                        <p class="justify-text">
+                        <!-- <p class="justify-text">
                             AuroraCap is a multimodal LLM designed for image and video detailed captioning. We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.
-                        </p>
+                        </p> -->
                     
 
                     <div class="button-container">
@@ -103,19 +103,19 @@
                     </div>
                 </div>
                 <div class="header-content">
-                    <div class="icon-item">
+                    <!-- <div class="icon-item">
                         <img src="./assets/img/icons/obs.svg" alt="Observation Icon">
                         <div><strong>Observation</strong>: We found that image-based LLaVA-like multimodal large language models can be easily adapted to a video one without any additional parameters but only with high-quality video-text instruction data for finetuning.</div>
                     </div>
-                    <br>
+                    <br> -->
                     <div class="icon-item">
                         <img src="./assets/img/icons/eff.svg" alt="Efficency Icon">
-                        <div><strong>Efficency</strong>: We can reduce the number of token used for image or video before injecting into LLM with marginal performance drop. Therefore, we propose AuroraCap, which is the state-of-the-art open-sourced video captioning model.</div>
+                        <div><strong>Model</strong>: we illustrate how we can reduce the number of tokens used for image or video input before injecting into LLM with marginal performance drop. Using these insights, we propose AuroraCap, which is shown to be the state-of-the-art video captioning model.</div>
                     </div>
                     <br>
                     <div class="icon-item">
                         <img src="./assets/img/icons/benchmark.svg" alt="Benchmark Icon">
-                        <div><strong>Benchmark</strong>: We also release VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions than existing datasets.</div>
+                        <div><strong>Benchmark</strong>: we present VDC, the first benchmark for detailed video captioning, featuring over one thousand videos with significantly longer and more detailed captions. We comprehensively evaluate proprietary and open-source models using our proposed VDCscore metric.</div>
                     </div>
                 </div>
             </div>
@@ -162,7 +162,7 @@
             We follow the simplest architecture design without additional parameters for temporal modeling. 
             To address the overhead caused by lengthy video sequences, we implement the token merging strategy, reducing the number of visual tokens input. 
             We present VDC, a video detailed captioning benchmark with over one thousand carefully annotated structured captions. 
-            In addition, we propose a new LLM-assisted metric VDCScore for bettering evaluation. 
+            In addition, we propose a new LLM-assisted metric VDCscore for bettering evaluation. 
             We adopt a divide-and-conquer strategy to transform the evaluation of long captions into multiple short question-answering pairs. 
         </p>
         <section id="model">
@@ -393,18 +393,18 @@
             </p>
             <p class="justify-text">
                 <h3 class="text">Evaluation Metric Design and Leaderboard</h1>
-                <strong>VDCScore: Evaluating Detailed Captions with LLMs</strong>
+                <strong>VDCscore: Evaluating Detailed Captions with LLMs</strong>
                 <p class="justify-text">
                     <br>
-                    We introduce VDCScore, a novel quantitative metric that utilizes LLMs to evaluate the similarity between predicted and ground-truth detailed captions through a divide-and-conquer approach.
-                    The core idea of VDCScore is to decompose long detailed captions into multiple short question-answering pairs, avergae the evaluation of each pair as the final result.
+                    We introduce VDCscore, a novel quantitative metric that utilizes LLMs to evaluate the similarity between predicted and ground-truth detailed captions through a divide-and-conquer approach.
+                    The core idea of VDCscore is to decompose long detailed captions into multiple short question-answering pairs, avergae the evaluation of each pair as the final result.
                 </p> 
                 <br>
                     <d-figure id="fig-vision_connector">
                         <figure>
-                            <img data-zoomable="" draggable="false" src="assets/img/vdcscore.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
+                            <img data-zoomable="" draggable="false" src="assets/img/VDCscore.png" alt="Video length in VDC" style="width: 100%;display: block; margin: 0 auto;">
                             <figcaption>
-                                VDCScore evaluation pipeline.
+                                VDCscore evaluation pipeline.
                             </figcaption>
                         </figure>
                     </d-figure>
@@ -629,7 +629,7 @@
                             </table>
                         </div>
                         <figcaption style="text-align: center; width: 140%;">
-                            Comparison of AuroraCap with LLM-based baseline methods on VDCScore under zero-shot structured captions setting. 
+                            Comparison of AuroraCap with LLM-based baseline methods on VDCscore under zero-shot structured captions setting. 
                         </figcaption>
                     </div>
                     <br>
