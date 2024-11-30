@@ -655,6 +655,14 @@
                                 </table>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const button = document.querySelector('[aria-controls="model_table"]');
+                                if (button) {
+                                    button.click();
+                                }
+                            });
+                        </script>
                     </p>
                     <p>
                         <strong>Structured detailed captions construction pipeline.</strong>
@@ -687,6 +695,15 @@
                                 </ol>
                             </div>
                         </div>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const button = document.querySelector('[aria-controls="transition_table_vh_5"]');
+                                if (button) {
+                                    button.click();
+                                }
+                            });
+                        </script>
+                        
                     </p>
                     <p>
                         To generate detailed, fine-grained, and accurate captions, we leverage GPT-4o to produce video descriptions. 

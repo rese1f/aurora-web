@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     minWidth: 90
                 },
                 {
-                    title: "Avg. VDC",
+                    title: "Avg. VDCscore",
                     columns: [
                         { title: "Acc.", field: "avg_acc", hozAlign: "center", formatter: colorFormatterAvg, minWidth: 50 },
                         { title: "Score", field: "avg_score", hozAlign: "center", formatter: colorFormatterAvg, minWidth: 70 },
