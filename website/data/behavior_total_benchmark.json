@@ -17,6 +17,23 @@
     "object_score": 2.41
   },
   {
+    "model": "Qwen2-VL-7B",
+    "frames": "64.",
+    "tpf": "1,924",
+    "avg_acc": 41.60,
+    "avg_score": 2.16,
+    "detailed_acc": 42.52,
+    "detailed_score": 2.20,
+    "camera_acc": 38.99,
+    "camera_score": 2.08,
+    "short_acc": 36.78,
+    "short_score": 1.91,
+    "background_acc": 41.88,
+    "background_score": 2.14,
+    "object_acc": 47.82,
+    "object_score": 2.45
+  },
+  {
     "model": "Aria-3.5B×8",
     "frames": "64",
     "tpf": "128",
