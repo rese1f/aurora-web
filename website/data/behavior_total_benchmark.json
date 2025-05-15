@@ -17,6 +17,23 @@
     "object_score": 2.06
   },
   {
+    "model": "LLaVAction-7B",
+    "frames": "64",
+    "tpf": "676",
+    "avg_acc": 40.18,
+    "avg_score": 2.08,
+    "detailed_acc": 43.7,
+    "detailed_score": 2.27,
+    "camera_acc": 37.6,
+    "camera_score": 1.99,
+    "short_acc": 41.5,
+    "short_score": 2.13,
+    "background_acc": 37.6,
+    "background_score": 1.95,
+    "object_acc": 40.5,
+    "object_score": 2.10
+  },
+  {
     "model": "VideoChat-Flash-7B",
     "frames": "64",
     "tpf": "676",
