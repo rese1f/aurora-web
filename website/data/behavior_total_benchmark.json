@@ -1,19 +1,19 @@
 [
   {
     "model": "VideoCap-R1",
-    "frames": "-",
-    "tpf": "-",
-    "avg_acc": 43.8,
-    "avg_score": 2.4,
-    "detailed_acc": "-",
+    "frames": "32",
+    "tpf": "588",
+    "avg_acc": "-",
+    "avg_score": "-",
+    "detailed_acc": "43.8",
     "detailed_score": "-",
-    "camera_acc": "-",
+    "camera_acc": "41.7",
     "camera_score": "-",
-    "short_acc": "-",
+    "short_acc": "35.2",
     "short_score": "-",
-    "background_acc": "-",
+    "background_acc": "47.2",
     "background_score": "-",
-    "object_acc": "-",
+    "object_acc": "47.0",
     "object_score": "-"
   },
   {
