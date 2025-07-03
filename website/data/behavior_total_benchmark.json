@@ -17,6 +17,23 @@
     "object_score": "2.5"
   },
   {
+    "model": "AVC-DPO-7B",
+    "frames": "32",
+    "tpf": "128",
+    "avg_acc": "47.7",
+    "avg_score": "2.47",
+    "detailed_acc": "48.9",
+    "detailed_score": "2.54",
+    "camera_acc": "50.4",
+    "camera_score": "2.66",
+    "short_acc": "39.0",
+    "short_score": "2.03",
+    "background_acc": "49.9",
+    "background_score": "2.57",
+    "object_acc": "50.5",
+    "object_score": "2.58"
+  },
+  {
     "model": "Tarsier-7B",
     "frames": "-",
     "tpf": "-",
